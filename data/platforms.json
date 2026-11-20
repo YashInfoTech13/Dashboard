@@ -10,16 +10,6 @@
     "wakes": false
   },
   {
-    "id": "admission",
-    "name": "Admission Dashboard",
-    "url": "https://adypu-admission.onrender.com/",
-    "category": "Admissions",
-    "color": "#F2B705",
-    "icon": "users",
-    "description": "Admission enquiries, follow-ups, reports and Excel / PDF exports.",
-    "wakes": true
-  },
-  {
     "id": "snbp",
     "name": "SNBP University Website",
     "url": "https://snbp.onrender.com/",
@@ -27,6 +17,16 @@
     "color": "#F26B1D",
     "icon": "globe",
     "description": "Admissions, schools, programmes, campus life and enquiries for SNBP University, Pune.",
+    "wakes": true
+  },
+  {
+    "id": "admission",
+    "name": "Admission Dashboard",
+    "url": "https://adypu-admission.onrender.com/",
+    "category": "Admissions",
+    "color": "#F2B705",
+    "icon": "users",
+    "description": "Admission enquiries, follow-ups, reports and Excel / PDF exports.",
     "wakes": true
   },
   {
