@@ -20,16 +20,6 @@
     "wakes": true
   },
   {
-    "id": "excellence360",
-    "name": "University Excellence 360°",
-    "url": "https://accreditationworking-all.github.io/360Degree/#home",
-    "category": "Accreditation",
-    "color": "#0E9F8E",
-    "icon": "award",
-    "description": "Accreditation, ranking & recognition handbook with the Strategic Planner 2027–29.",
-    "wakes": false
-  },
-  {
     "id": "yash",
     "name": "Yash Infotech Network",
     "url": "https://snbpwakadcampus.github.io/YashinfoTech/",
@@ -37,6 +27,16 @@
     "color": "#7A4BD6",
     "icon": "route",
     "description": "Free admission support, research mentoring, publication & IPR and tech solutions.",
+    "wakes": false
+  },
+  {
+    "id": "excellence360",
+    "name": "University Excellence 360°",
+    "url": "https://accreditationworking-all.github.io/360Degree/#home",
+    "category": "Accreditation",
+    "color": "#0E9F8E",
+    "icon": "award",
+    "description": "Accreditation, ranking & recognition handbook with the Strategic Planner 2027–29.",
     "wakes": false
   },
   {
