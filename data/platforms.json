@@ -30,16 +30,6 @@
     "wakes": true
   },
   {
-    "id": "academic",
-    "name": "ADYPU Academic Dashboard",
-    "url": "https://adypu-daybook.fast-page.org/index.php",
-    "category": "Academic",
-    "color": "#2F6FED",
-    "icon": "book",
-    "description": "Academic daybook, records and reports for ADYPU in one place.",
-    "wakes": false
-  },
-  {
     "id": "ojas-hospital",
     "name": "Ojas Hospital",
     "url": "https://ojashospital2025-lab.github.io/OPD/",
@@ -47,6 +37,16 @@
     "color": "#f08205",
     "icon": "grid",
     "description": "",
+    "wakes": false
+  },
+  {
+    "id": "academic",
+    "name": "ADYPU Academic Dashboard",
+    "url": "https://adypu-daybook.fast-page.org/index.php",
+    "category": "Academic",
+    "color": "#2F6FED",
+    "icon": "book",
+    "description": "Academic daybook, records and reports for ADYPU in one place.",
     "wakes": false
   },
   {
