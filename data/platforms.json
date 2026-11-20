@@ -20,16 +20,6 @@
     "wakes": true
   },
   {
-    "id": "academic",
-    "name": "ADYPU Academic Dashboard",
-    "url": "https://adypu-daybook.fast-page.org/index.php",
-    "category": "Academic",
-    "color": "#2F6FED",
-    "icon": "book",
-    "description": "Academic daybook, records and reports for ADYPU in one place.",
-    "wakes": false
-  },
-  {
     "id": "snbp",
     "name": "SNBP University Website",
     "url": "https://snbp.onrender.com/",
@@ -38,6 +28,16 @@
     "icon": "globe",
     "description": "Admissions, schools, programmes, campus life and enquiries for SNBP University, Pune.",
     "wakes": true
+  },
+  {
+    "id": "academic",
+    "name": "ADYPU Academic Dashboard",
+    "url": "https://adypu-daybook.fast-page.org/index.php",
+    "category": "Academic",
+    "color": "#2F6FED",
+    "icon": "book",
+    "description": "Academic daybook, records and reports for ADYPU in one place.",
+    "wakes": false
   },
   {
     "id": "excellence360",
