@@ -10,6 +10,16 @@
     "wakes": false
   },
   {
+    "id": "snbp",
+    "name": "SNBP University Website",
+    "url": "https://snbp.onrender.com/",
+    "category": "Website",
+    "color": "#F26B1D",
+    "icon": "globe",
+    "description": "Admissions, schools, programmes, campus life and enquiries for SNBP University, Pune.",
+    "wakes": true
+  },
+  {
     "id": "yash",
     "name": "Yash Infotech Network",
     "url": "https://snbpwakadcampus.github.io/YashinfoTech/",
@@ -27,16 +37,6 @@
     "color": "#F2B705",
     "icon": "users",
     "description": "Admission enquiries, follow-ups, reports and Excel / PDF exports.",
-    "wakes": true
-  },
-  {
-    "id": "snbp",
-    "name": "SNBP University Website",
-    "url": "https://snbp.onrender.com/",
-    "category": "Website",
-    "color": "#F26B1D",
-    "icon": "globe",
-    "description": "Admissions, schools, programmes, campus life and enquiries for SNBP University, Pune.",
     "wakes": true
   },
   {
