@@ -92,6 +92,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .light{width:9px;height:9px;border-radius:50%;background:#7F8BAA;display:inline-block}
 .light.up{background:#3BD17A;box-shadow:0 0 8px #3BD17A}
 .light.wake{background:#F2B705;box-shadow:0 0 8px #F2B705;animation:blink 1s infinite}
+.light.lock{background:#B9A8FF;box-shadow:0 0 8px #B9A8FF}
+.stag.lock{background:#EEE8FF;color:#4B2BA8}
+.lockbox{width:min(400px,100%);background:var(--surface);color:var(--fg);border-radius:20px;padding:24px;position:relative;margin-top:6vh}
+.lockbox .lk-ic{width:52px;height:52px;border-radius:16px;background:var(--navy);color:#F2B705;display:grid;place-items:center;margin-bottom:12px}
+.lockbox h3{font-size:20px;padding-right:36px}
+.lockbox label{display:block;font-weight:600;font-size:13.5px;margin:12px 0 4px}
+.lockbox input{width:100%;font:inherit;font-size:16px;padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg)}
+.lkmsg{min-height:20px;font-size:13.5px;font-weight:600;color:var(--bad);margin-top:10px}
 .light.down{background:#7F8BAA}
 @keyframes blink{50%{opacity:.3}}
 .board-foot{font-size:12px;color:#8E9BC4;margin-top:8px}
@@ -346,6 +354,20 @@ section.band.alt{background:var(--surface-2)}
   </div>
 </div>
 
+<!-- admin-only login -->
+<div class="overlay" id="lock" hidden role="dialog" aria-modal="true" aria-labelledby="lkTitle">
+  <form class="lockbox" id="lkForm" autocomplete="on">
+    <button class="x" type="button" id="lkClose" aria-label="Close">×</button>
+    <div class="lk-ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+    <h3 id="lkTitle">Admin only</h3>
+    <p style="color:var(--muted);font-size:14px;margin-top:4px">This platform is for authorised admins only. Enter your ID and password to open it.</p>
+    <label for="lkId">Admin ID</label><input id="lkId" name="username" autocomplete="username" autocapitalize="none" spellcheck="false">
+    <label for="lkPw">Password</label><input id="lkPw" name="password" type="password" autocomplete="current-password">
+    <p class="lkmsg" id="lkMsg" role="alert"></p>
+    <button class="btn btn-gold" id="lkGo" type="submit" style="width:100%;justify-content:center">Unlock &amp; open</button>
+  </form>
+</div>
+
 <div class="redirect" id="redirect" hidden><div><div class="ring" aria-hidden="true"></div><h2 id="rdTitle">Taking you there…</h2><p id="rdSub"></p><p style="margin-top:18px"><a class="btn btn-gold" id="rdNow" href="#">Open now</a> <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.4)" href="./" id="rdStay">Stay on dashboard</a></p></div></div>
 <div class="toast" id="toast" hidden></div>
 
@@ -390,6 +412,7 @@ section.band.alt{background:var(--surface-2)}
   function doRedirect(){
     var p=P.find(function(x){return x.id===GO});
     if(!p){if(GO)toast("That link isn't on the dashboard any more.");return}
+    if(p.locked){renderAll();openLocked(p);return}
     var url=safeUrl(p.url);if(!url)return;
     $("redirect").hidden=false;$("rdTitle").textContent="Taking you to "+p.name+"…";
     $("rdSub").textContent=p.wakes?"This platform is on free hosting and may take up to 30 seconds to wake up.":"Opening in a moment.";
@@ -397,8 +420,42 @@ section.band.alt{background:var(--surface-2)}
     setTimeout(function(){location.replace(url)},1600);
   }
 
+  var rendered=false;
+  function renderAll(){if(rendered)return;rendered=true;renderBoard();renderCards();renderServices();renderPartners();renderRecent();}
+
+  // ----- admin-only platforms: link stored encrypted with the ID + password -----
+  var UNLOCKED={};
+  function b64d(t){var b=atob(t),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+  function decryptUrl(enc,id,pw){
+    var te=new TextEncoder();
+    return crypto.subtle.importKey("raw",te.encode(id.trim().toLowerCase()+"\n"+pw),"PBKDF2",false,["deriveKey"])
+      .then(function(k){return crypto.subtle.deriveKey({name:"PBKDF2",salt:b64d(enc.salt),iterations:enc.iter||250000,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["decrypt"])})
+      .then(function(key){return crypto.subtle.decrypt({name:"AES-GCM",iv:b64d(enc.iv)},key,b64d(enc.ct))})
+      .then(function(buf){return new TextDecoder().decode(buf)});
+  }
+  var lockP=null;
+  function openLocked(p){
+    if(UNLOCKED[p.id]){var w=window.open(UNLOCKED[p.id],"_blank","noopener");if(!w)location.href=UNLOCKED[p.id];return}
+    lockP=p;$("lkTitle").textContent=p.name;$("lkMsg").textContent="";$("lkId").value="";$("lkPw").value="";$("lock").hidden=false;$("lkId").focus();
+  }
+  function closeLock(){$("lock").hidden=true;lockP=null}
+  $("lkClose").addEventListener("click",closeLock);
+  $("lock").addEventListener("click",function(e){if(e.target===this)closeLock()});
+  $("lkForm").addEventListener("submit",function(e){
+    e.preventDefault();var p=lockP;if(!p)return;var id=$("lkId").value,pw=$("lkPw").value;
+    if(!id.trim()||!pw){$("lkMsg").textContent="Enter your admin ID and password.";return}
+    if(!p.enc||!window.crypto||!crypto.subtle){$("lkMsg").textContent="This platform hasn't been locked properly yet. Set its ID and password in Team login.";return}
+    var w=window.open("","_blank");$("lkGo").disabled=true;$("lkMsg").textContent="Checking…";
+    decryptUrl(p.enc,id,pw).then(function(url){
+      if(!/^https?:\/\//i.test(url))throw 0;UNLOCKED[p.id]=url;closeLock();toast("Access granted");
+      if(w){try{w.opener=null}catch(x){}w.location.replace(url)}else location.href=url;
+    }).catch(function(){if(w)w.close();$("lkMsg").textContent="Wrong ID or password. Please try again.";$("lkPw").value="";$("lkPw").focus()})
+    .then(function(){$("lkGo").disabled=false});
+  });
+
   // ----- status check (reachability, best effort) -----
   function check(p){
+    if(p.locked){STATUS[p.id]="locked";paintStatus(p.id);return}
     var url=safeUrl(p.url);if(!url)return;
     STATUS[p.id]="checking";paintStatus(p.id);
     var slow=setTimeout(function(){if(STATUS[p.id]==="checking"){STATUS[p.id]="wake";paintStatus(p.id)}},3500);
@@ -406,20 +463,20 @@ section.band.alt{background:var(--surface-2)}
     fetch(url,{mode:"no-cors",cache:"no-store",signal:ctrl?ctrl.signal:undefined}).then(function(){STATUS[p.id]="up"}).catch(function(){STATUS[p.id]="down"})
       .then(function(){clearTimeout(slow);clearTimeout(kill);paintStatus(p.id)});
   }
-  var LABEL={checking:"Checking…",wake:"Waking up",up:"Reachable",down:"Tap to open"};
+  var LABEL={checking:"Checking…",wake:"Waking up",up:"Reachable",down:"Tap to open",locked:"🔒 Admin only"};
   function paintStatus(id){
     var s=STATUS[id]||"checking";
-    Array.prototype.forEach.call(document.querySelectorAll('[data-light="'+id+'"]'),function(n){n.className="light "+(s==="up"?"up":s==="wake"||s==="checking"?"wake":"down")});
-    Array.prototype.forEach.call(document.querySelectorAll('[data-tag="'+id+'"]'),function(n){n.className="stag "+(s==="up"?"up":s==="down"?"":"wake");n.lastChild.textContent=LABEL[s]});
+    Array.prototype.forEach.call(document.querySelectorAll('[data-light="'+id+'"]'),function(n){n.className="light "+(s==="up"?"up":s==="locked"?"lock":s==="wake"||s==="checking"?"wake":"down")});
+    Array.prototype.forEach.call(document.querySelectorAll('[data-tag="'+id+'"]'),function(n){n.className="stag "+(s==="up"?"up":s==="locked"?"lock":s==="down"?"":"wake");n.lastChild.textContent=LABEL[s]});
   }
 
-  function remember(p){var r=store("yi-recent")||[];r=r.filter(function(x){return x!==p.id});r.unshift(p.id);store("yi-recent",r.slice(0,4));renderRecent()}
+  function remember(p){if(p.locked)return;var r=store("yi-recent")||[];r=r.filter(function(x){return x!==p.id});r.unshift(p.id);store("yi-recent",r.slice(0,4));renderRecent()}
   function renderRecent(){
-    var r=(store("yi-recent")||[]).map(function(id){return P.find(function(x){return x.id===id})}).filter(Boolean);
+    var r=(store("yi-recent")||[]).map(function(id){return P.find(function(x){return x.id===id})}).filter(function(p){return p&&!p.locked});
     var box=$("recentBox");Array.prototype.slice.call(box.querySelectorAll("a")).forEach(function(n){n.remove()});
     box.hidden=!r.length;r.forEach(function(p){var a=el("a","chipbtn",p.name);a.href=safeUrl(p.url);a.target="_blank";a.rel="noopener";a.addEventListener("click",function(){remember(p)});box.appendChild(a)});
   }
-  function open(p){var u=safeUrl(p.url);if(!u)return;remember(p);window.open(u,"_blank","noopener")}
+  function open(p){if(p.locked){openLocked(p);return}var u=safeUrl(p.url);if(!u)return;remember(p);window.open(u,"_blank","noopener")}
 
   // ----- board -----
   function renderBoard(){
@@ -443,9 +500,9 @@ section.band.alt{background:var(--surface-2)}
       var top=el("div","ptop");var ic=el("div","picon"+(darkText(p.color||"#F2B705")?"":" dark"));ic.innerHTML=icon(p.icon,26);top.appendChild(ic);
       var tag=el("span","stag");tag.setAttribute("data-tag",p.id);tag.appendChild(el("span","light"));tag.firstChild.setAttribute("data-light",p.id);tag.appendChild(document.createTextNode("Checking…"));top.appendChild(tag);b.appendChild(top);
       b.appendChild(el("span","pcat",p.category||""));b.appendChild(el("h3",null,p.name));b.appendChild(el("p",null,p.description||""));
-      var host="";try{host=new URL(p.url).host}catch(e){}b.appendChild(el("span","purl",host));
+      var host=p.locked?"🔒 ID & password required":"";if(!p.locked)try{host=new URL(p.url).host}catch(e){}b.appendChild(el("span","purl",host));
       var act=el("div","pact");
-      var a=el("a","btn btn-gold btn-sm","Open");a.href=safeUrl(p.url);a.target="_blank";a.rel="noopener";a.addEventListener("click",function(){remember(p)});act.appendChild(a);
+      var a;if(p.locked){a=el("button","btn btn-gold btn-sm","🔒 Admin login");a.type="button";a.addEventListener("click",function(){openLocked(p)})}else{a=el("a","btn btn-gold btn-sm","Open");a.href=safeUrl(p.url);a.target="_blank";a.rel="noopener";a.addEventListener("click",function(){remember(p)})}act.appendChild(a);
       var s=el("button","btn btn-ghost btn-sm","Share / QR");s.type="button";s.addEventListener("click",function(){share(p)});act.appendChild(s);
       b.appendChild(act);c.appendChild(b);g.appendChild(c);
     });
@@ -567,8 +624,8 @@ section.band.alt{background:var(--surface-2)}
   document.addEventListener("keydown",function(e){
     var typing=/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||"");
     if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();$("pal").hidden?openPal():closePal();return}
-    if(e.key==="Escape"){if(!$("pal").hidden)closePal();if(!$("share").hidden)closeShare();return}
-    if(typing||e.ctrlKey||e.metaKey||e.altKey||!$("pal").hidden||!$("share").hidden)return;
+    if(e.key==="Escape"){if(!$("lock").hidden)closeLock();if(!$("pal").hidden)closePal();if(!$("share").hidden)closeShare();return}
+    if(typing||e.ctrlKey||e.metaKey||e.altKey||!$("pal").hidden||!$("share").hidden||!$("lock").hidden)return;
     if(e.key==="/"){e.preventDefault();openPal();return}
     var n=parseInt(e.key,10);if(n>=1&&n<=9&&P[n-1]){open(P[n-1])}
   });
@@ -576,8 +633,8 @@ section.band.alt{background:var(--surface-2)}
 
   Promise.all([getJSON("data/platforms.json"),getJSON("data/services.json"),getJSON("data/partners.json")]).then(function(a){
     P=a[0]||[];S=a[1]||[];R=a[2]||[];
-    if(GO){doRedirect();if(P.find(function(x){return x.id===GO}))return}
-    renderBoard();renderCards();renderServices();renderPartners();renderRecent();
+    if(GO){var gp=P.find(function(x){return x.id===GO});doRedirect();if(gp)return}
+    renderAll();
     count("platforms",P.length);count("services",S.length);count("partners",R.length);
     P.forEach(check);
   });
