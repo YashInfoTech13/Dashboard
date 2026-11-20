@@ -10,16 +10,6 @@
     "wakes": false
   },
   {
-    "id": "academic",
-    "name": "ADYPU Academic Dashboard",
-    "url": "https://adypu-daybook.fast-page.org/index.php",
-    "category": "Academic",
-    "color": "#2F6FED",
-    "icon": "book",
-    "description": "Academic daybook, records and reports for ADYPU in one place.",
-    "wakes": false
-  },
-  {
     "id": "admission",
     "name": "Admission Dashboard",
     "url": "https://adypu-admission.onrender.com/",
@@ -28,6 +18,16 @@
     "icon": "users",
     "description": "Admission enquiries, follow-ups, reports and Excel / PDF exports.",
     "wakes": true
+  },
+  {
+    "id": "academic",
+    "name": "ADYPU Academic Dashboard",
+    "url": "https://adypu-daybook.fast-page.org/index.php",
+    "category": "Academic",
+    "color": "#2F6FED",
+    "icon": "book",
+    "description": "Academic daybook, records and reports for ADYPU in one place.",
+    "wakes": false
   },
   {
     "id": "snbp",
