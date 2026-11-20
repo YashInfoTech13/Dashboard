@@ -42,12 +42,20 @@
   {
     "id": "academic",
     "name": "ADYPU Academic Dashboard",
-    "url": "https://adypu-daybook.fast-page.org/index.php",
+    "url": "",
     "category": "Academic",
-    "color": "#2F6FED",
+    "color": "#2f6fed",
     "icon": "book",
     "description": "Academic daybook, records and reports for ADYPU in one place.",
-    "wakes": false
+    "wakes": false,
+    "locked": true,
+    "enc": {
+      "v": 1,
+      "iter": 250000,
+      "salt": "/nxK9u4xUdrFHUC+LrgDFA==",
+      "iv": "M1kd9o5AIBYHlT3g",
+      "ct": "LyP0mL7Jegb8dOC5Kc4SLhHah7R2sDhp8vZ2FXsZnoQUMpnR/hOWmuXywBgE+Zki9ZntihpRLzmopXLb/A=="
+    }
   },
   {
     "id": "excellence360",
