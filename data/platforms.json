@@ -48,5 +48,15 @@
     "icon": "award",
     "description": "Accreditation, ranking & recognition handbook with the Strategic Planner 2027–29.",
     "wakes": false
+  },
+  {
+    "id": "ojas-hospital",
+    "name": "Ojas Hospital",
+    "url": "https://ojashospital2025-lab.github.io/OPD/",
+    "category": "OPD",
+    "color": "#f08205",
+    "icon": "grid",
+    "description": "",
+    "wakes": false
   }
 ]
