@@ -117,6 +117,7 @@ code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:
           <div class="full"><label for="pLogo">Logo (PNG or JPG)</label><input id="pLogo" type="file" accept="image/png,image/jpeg,image/webp"><div class="prev" id="pPrev">No logo — initials will be shown</div><p class="help">Resized automatically before upload. Use a logo on a white or transparent background.</p></div>
         </div>
         <div id="fPlatform" class="grid2" style="margin-top:14px" hidden>
+          <div class="full"><label for="lAccess">Secure it or open access? *</label><select id="lAccess"><option value="">Choose one…</option><option value="public">Open access: anyone can open it</option><option value="locked">Secure: ask for admin ID &amp; password</option></select></div>
           <div class="full"><label for="lName">Platform name *</label><input id="lName" placeholder="e.g. Placement Portal"></div>
           <div class="full"><label for="lUrl">Link *</label><input id="lUrl" placeholder="https://…"></div>
           <div><label for="lCat">Category</label><input id="lCat" placeholder="Academic / Admissions / Website…"></div>
@@ -124,7 +125,6 @@ code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:
           <div><label for="lColor">Line colour</label><input id="lColor" type="color" value="#F2B705" style="height:44px;padding:4px"></div>
           <div><label for="lWakes">Free hosting (Render)?</label><select id="lWakes"><option value="false">No</option><option value="true">Yes — may take ~30 s to wake</option></select></div>
           <div class="full"><label for="lDesc">Short description</label><textarea id="lDesc" maxlength="160"></textarea></div>
-          <div class="full"><label for="lAccess">Who can open it?</label><select id="lAccess"><option value="public">Everyone (public link)</option><option value="locked">Admin only: ask for ID &amp; password</option></select></div>
           <div class="full lockset" id="lockSet" hidden>
             <p class="help" style="margin:0 0 8px">The link is encrypted with this ID and password, so it never appears on the public dashboard. Anyone who should open it needs the same ID and password. <b>If you forget them, just set new ones here.</b></p>
             <div class="grid2">
@@ -233,7 +233,7 @@ code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:
     $("fPartner").hidden=KIND!=="partners";$("fPlatform").hidden=KIND!=="platforms";
     $("formTitle").textContent=KIND==="partners"?"Add a partner":"Add a platform";
     $("pPrev").textContent="No logo — initials will be shown";$("pSince").value=String(new Date().getFullYear());$("lColor").value="#F2B705";
-    $("lLink").textContent=location.href.replace(/admin\.html.*$/,"")+"?go=…";$("lAccess").value="public";syncLock();render();
+    $("lLink").textContent=location.href.replace(/admin\.html.*$/,"")+"?go=…";$("lAccess").value="";syncLock();render();
   }
   function edit(r){
     resetForm();EDIT=r;$("formTitle").textContent="Edit: "+r.name;
@@ -274,6 +274,7 @@ code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:
     }else{
       var n=$("lName").value.trim(),u=$("lUrl").value.trim();
       if(!n){fmsg("Enter the platform name.","bad");return}
+      if(!$("lAccess").value){fmsg("Choose whether this platform is secure or open access.","bad");$("lAccess").focus();return}
       var locked=$("lAccess").value==="locked",keepEnc=locked&&old&&old.locked&&old.enc&&!u&&!$("lkUser").value&&!$("lkPass").value;
       if(!keepEnc&&(!u||!validUrl(u))){fmsg(old&&old.locked?"Enter the link again (it's hidden while locked), starting with https://":"Enter the full link, starting with https://","bad");return}
       if(locked&&!keepEnc){
