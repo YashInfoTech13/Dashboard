@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Yash Infotech · Dashboard Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="img/ylogo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a plain admin console — connect card, then tabs with a list on the left and an edit form on the right. */
+:root{--navy:#0F1E4A;--gold:#F2B705;--bg:#F4F6FB;--surface:#FFFFFF;--surface-2:#EBEFF9;--line:#D7DEEF;--fg:#14203F;--muted:#4A5578;--ok:#0B6B34;--ok-bg:#DFF3E6;--bad:#B3123F;--bad-bg:#FDEDF2;
+  --display:"Poppins",system-ui,sans-serif;--body:"Plus Jakarta Sans",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;color-scheme:light}
+@media (prefers-color-scheme: dark){:root{--bg:#070E28;--surface:#0E1A42;--surface-2:#132353;--line:#263B78;--fg:#EDF1FF;--muted:#AEB9DE;--ok:#7BD9A0;--ok-bg:#12382A;--bad:#FF8FAE;--bad-bg:#3A1428;color-scheme:dark}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.2}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.top{background:var(--navy);color:#fff}
+.top .in{max-width:1200px;margin:0 auto;padding:12px max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px));display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}.brand img{height:40px;background:#fff;border-radius:10px;padding:3px 8px}
+.brand b{font-family:var(--display);font-size:18px}.brand small{display:block;font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.12em}
+.wrap{max-width:1200px;margin:0 auto;padding:22px max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px))}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:22px}
+.btn{font:inherit;font-family:var(--display);font-weight:700;font-size:14.5px;border:0;border-radius:12px;padding:10px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn-gold{background:var(--gold);color:#0F1E4A}.btn-navy{background:var(--navy);color:#fff}.btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--fg)}
+.top .btn-ghost{color:#fff;border-color:rgba(255,255,255,.4)}
+.btn-bad{background:var(--bad-bg);color:var(--bad)}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn-sm{padding:6px 10px;font-size:13px;border-radius:9px}
+label{font-weight:600;font-size:13px;display:block;margin-bottom:4px}
+input,select,textarea{font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);width:100%}
+textarea{min-height:80px;resize:vertical}
+.help{font-size:13px;color:var(--muted);margin-top:4px}
+.msg{font-size:13.5px;font-weight:600;min-height:20px;margin-top:8px}.msg.bad{color:var(--bad)}.msg.good{color:var(--ok)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.full{grid-column:1/-1}
+.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:700;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:8px 16px;cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start}
+.list{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px}
+.row.on{border-color:var(--gold);box-shadow:0 0 0 3px rgba(242,183,5,.3)}
+.thumb{width:56px;height:44px;border-radius:8px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;font-family:var(--display);font-weight:800;color:#0F1E4A}
+.thumb img{max-width:100%;max-height:100%;object-fit:contain}
+.swatch{width:40px;height:40px;border-radius:10px}
+.row b{display:block;font-family:var(--display);font-size:15px}
+.row small{color:var(--muted);font-size:12.5px}
+.rbtns{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.prev{display:grid;place-items:center;height:110px;border-radius:12px;background:#fff;border:1.5px dashed var(--line);margin-top:6px;color:#4A5578}
+.prev img{max-height:96px;max-width:90%}
+.status{display:flex;align-items:center;gap:8px;font-size:13.5px;color:#D5DCF2}
+.dot{width:9px;height:9px;border-radius:50%;background:#7BD9A0}
+.empty{padding:24px;text-align:center;color:var(--muted);border:1.5px dashed var(--line);border-radius:14px}
+.steps{margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:14px}
+.steps li{margin:4px 0}
+code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:1px 6px;border-radius:6px}
+@media (max-width:860px){.cols{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.grid2{grid-template-columns:minmax(0,1fr)}.row{grid-template-columns:44px minmax(0,1fr)}.rbtns{grid-column:1/-1;justify-content:flex-start}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <div class="brand"><img src="img/ylogo.jpg" alt="Yash Infotech"><div><b>Dashboard Admin</b><small>PARTNERS · CLIENTS · PLATFORMS</small></div></div>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="status" id="who" hidden><span class="dot"></span><span id="whoTxt"></span></span><a class="btn btn-ghost" href="./">View dashboard</a><button class="btn btn-ghost" type="button" id="logout" hidden>Disconnect</button></div>
+</div></header>
+
+<main class="wrap">
+  <!-- connect -->
+  <section class="card" id="vConnect" style="max-width:640px;margin:20px auto">
+    <h2>Connect to GitHub</h2>
+    <p class="help" style="font-size:14px">Changes are saved straight into the dashboard's GitHub repository and appear on the live dashboard about a minute later. You need a GitHub access token with write access to this repository only.</p>
+    <div class="grid2" style="margin-top:16px">
+      <div><label for="cOwner">GitHub account</label><input id="cOwner" value="YashInfoTech13"></div>
+      <div><label for="cRepo">Repository</label><input id="cRepo" value="Dashboard"></div>
+      <div class="full"><label for="cToken">Access token</label><input id="cToken" type="password" autocomplete="off" placeholder="github_pat_…"></div>
+      <label class="full" style="display:flex;gap:8px;align-items:center;font-weight:500"><input type="checkbox" id="cRemember" style="width:18px;height:18px"> Remember on this device (only on your own computer)</label>
+    </div>
+    <button class="btn btn-gold" type="button" id="cGo" style="margin-top:14px">Connect</button>
+    <p class="msg" id="cMsg" role="status"></p>
+    <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">How to get a token (one time, 2 minutes)</summary>
+      <ol class="steps">
+        <li>On GitHub, open <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>.</li>
+        <li>Name it <code>dashboard-admin</code> and pick an expiry (for example 1 year).</li>
+        <li>Repository access: <b>Only select repositories → YashInfoTech13/Dashboard</b>.</li>
+        <li>Permissions → Repository permissions → <b>Contents: Read and write</b>.</li>
+        <li>Generate, copy the token and paste it above. Don't share it; anyone with it can edit the dashboard.</li>
+      </ol>
+    </details>
+  </section>
+
+  <!-- editor -->
+  <section id="vEdit" hidden>
+    <div class="tabs" role="group" aria-label="What to edit">
+      <button class="tab" type="button" data-kind="partners" aria-pressed="true">Tie-ups, clients &amp; partners</button>
+      <button class="tab" type="button" data-kind="platforms" aria-pressed="false">Platforms (dashboard links)</button>
+    </div>
+    <div class="cols">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px"><h3 id="listTitle">Tie-ups, clients &amp; partners</h3><button class="btn btn-navy btn-sm" type="button" id="addNew">+ Add new</button></div>
+        <div class="list" id="list"><div class="empty">Loading…</div></div>
+      </div>
+      <form class="card" id="form" novalidate>
+        <h3 id="formTitle">Add a partner</h3>
+        <div id="fPartner" class="grid2" style="margin-top:14px">
+          <div class="full"><label for="pName">Name *</label><input id="pName" placeholder="e.g. ABC Institute of Technology"></div>
+          <div><label for="pType">Show under *</label><select id="pType"><option>Tie-up</option><option>Client</option><option>Service partner</option></select></div>
+          <div><label for="pSince">Since (year)</label><input id="pSince" inputmode="numeric" maxlength="4" placeholder="2026"></div>
+          <div><label for="pCity">City</label><input id="pCity" placeholder="Pune"></div>
+          <div><label for="pUrl">Website</label><input id="pUrl" placeholder="https://…"></div>
+          <div class="full"><label for="pDesc">Short description</label><textarea id="pDesc" maxlength="180" placeholder="e.g. Admission tie-up for BBA, MBA and MCA programmes."></textarea></div>
+          <div class="full"><label for="pLogo">Logo (PNG or JPG)</label><input id="pLogo" type="file" accept="image/png,image/jpeg,image/webp"><div class="prev" id="pPrev">No logo — initials will be shown</div><p class="help">Resized automatically before upload. Use a logo on a white or transparent background.</p></div>
+        </div>
+        <div id="fPlatform" class="grid2" style="margin-top:14px" hidden>
+          <div class="full"><label for="lName">Platform name *</label><input id="lName" placeholder="e.g. Placement Portal"></div>
+          <div class="full"><label for="lUrl">Link *</label><input id="lUrl" placeholder="https://…"></div>
+          <div><label for="lCat">Category</label><input id="lCat" placeholder="Academic / Admissions / Website…"></div>
+          <div><label for="lIcon">Icon</label><select id="lIcon"><option value="grid">Grid</option><option value="book">Book</option><option value="users">People</option><option value="award">Award</option><option value="globe">Globe</option><option value="chart">Chart</option><option value="route">Route</option><option value="link">Link</option></select></div>
+          <div><label for="lColor">Line colour</label><input id="lColor" type="color" value="#F2B705" style="height:44px;padding:4px"></div>
+          <div><label for="lWakes">Free hosting (Render)?</label><select id="lWakes"><option value="false">No</option><option value="true">Yes — may take ~30 s to wake</option></select></div>
+          <div class="full"><label for="lDesc">Short description</label><textarea id="lDesc" maxlength="160"></textarea></div>
+          <p class="help full">Direct share link after saving: <code id="lLink">…?go=</code></p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px"><button class="btn btn-gold" type="submit" id="save">Save &amp; publish</button><button class="btn btn-ghost" type="button" id="cancel">Clear form</button></div>
+        <p class="msg" id="fMsg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  var GH={owner:"",repo:"",token:"",branch:"main"};
+  var KIND="partners",DATA={partners:[],platforms:[]},SHA={},EDIT=null,LOGO=null;
+  var PATH={partners:"data/partners.json",platforms:"data/platforms.json"};
+
+  function api(path,opt){
+    opt=opt||{};
+    return fetch("https://api.github.com/repos/"+GH.owner+"/"+GH.repo+path,{method:opt.method||"GET",headers:{"Authorization":"Bearer "+GH.token,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:opt.body?JSON.stringify(opt.body):undefined,cache:"no-store"})
+      .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok){var e=new Error(j.message||("HTTP "+r.status));e.status=r.status;throw e}return j})});
+  }
+  function b64enc(s){return btoa(unescape(encodeURIComponent(s)))}
+  function b64dec(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,""))))}
+  function getFile(p){return api("/contents/"+p+"?ref="+GH.branch).then(function(j){return{sha:j.sha,text:b64dec(j.content)}})}
+  function putFile(p,content64,message,sha){return api("/contents/"+p,{method:"PUT",body:{message:message,content:content64,branch:GH.branch,sha:sha||undefined}})}
+
+  // ---- connect ----
+  function cmsg(t,c){$("cMsg").textContent=t;$("cMsg").className="msg"+(c?" "+c:"")}
+  function connect(){
+    GH.owner=$("cOwner").value.trim();GH.repo=$("cRepo").value.trim();GH.token=$("cToken").value.trim();
+    if(!GH.owner||!GH.repo||!GH.token){cmsg("Fill in the account, repository and token.","bad");return}
+    $("cGo").disabled=true;cmsg("Connecting…");
+    api("").then(function(r){
+      GH.branch=r.default_branch||"main";
+      if(r.permissions&&!r.permissions.push)throw Object.assign(new Error("no-push"),{status:403});
+      try{var v=JSON.stringify({o:GH.owner,r:GH.repo,t:GH.token});sessionStorage.setItem("yi-gh",v);if($("cRemember").checked)localStorage.setItem("yi-gh",v);else localStorage.removeItem("yi-gh")}catch(e){}
+      return Promise.all([load("partners"),load("platforms")]);
+    }).then(function(){
+      $("vConnect").hidden=true;$("vEdit").hidden=false;$("who").hidden=false;$("logout").hidden=false;$("whoTxt").textContent=GH.owner+"/"+GH.repo+" · "+GH.branch;
+      render();resetForm();
+    }).catch(function(e){
+      $("cGo").disabled=false;
+      cmsg(e.status===401?"The token isn't valid. Check it and try again.":e.status===404?"Repository not found, or the token can't see it.":e.status===403?"This token can't write to the repository. Give it Contents: Read and write.":"Couldn't connect: "+e.message,"bad");
+    });
+  }
+  function load(kind){
+    return getFile(PATH[kind]).then(function(f){SHA[kind]=f.sha;try{DATA[kind]=JSON.parse(f.text)}catch(e){DATA[kind]=[]}})
+      .catch(function(e){if(e.status===404){SHA[kind]=null;DATA[kind]=[];return}throw e});
+  }
+  $("cGo").addEventListener("click",connect);
+  $("cToken").addEventListener("keydown",function(e){if(e.key==="Enter")connect()});
+  $("logout").addEventListener("click",function(){try{sessionStorage.removeItem("yi-gh");localStorage.removeItem("yi-gh")}catch(e){}location.reload()});
+  try{var saved=JSON.parse(sessionStorage.getItem("yi-gh")||localStorage.getItem("yi-gh")||"null");if(saved){$("cOwner").value=saved.o;$("cRepo").value=saved.r;$("cToken").value=saved.t;$("cRemember").checked=!!localStorage.getItem("yi-gh");connect()}}catch(e){}
+
+  // ---- tabs ----
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(t){t.addEventListener("click",function(){
+    KIND=t.dataset.kind;Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(x){x.setAttribute("aria-pressed",x===t?"true":"false")});
+    $("listTitle").textContent=KIND==="partners"?"Tie-ups, clients & partners":"Platforms (dashboard links)";render();resetForm();
+  })});
+
+  // ---- list ----
+  function render(){
+    var l=$("list");l.textContent="";var rows=DATA[KIND];
+    if(!rows.length){l.appendChild(el("div","empty","Nothing here yet. Use “+ Add new”."));return}
+    rows.forEach(function(r,i){
+      var row=el("div","row"+(EDIT&&EDIT.id===r.id?" on":""));
+      if(KIND==="partners"){var th=el("div","thumb");if(r.logo){var im=el("img");im.src=r.logo+"?v="+Date.now();im.alt="";th.appendChild(im)}else th.textContent=(r.name||"?").slice(0,2).toUpperCase();row.appendChild(th)}
+      else{var sw=el("div","swatch");sw.style.background=r.color||"#F2B705";row.appendChild(sw)}
+      var t=el("div");t.appendChild(el("b",null,r.name));t.appendChild(el("small",null,KIND==="partners"?[r.type,r.city].filter(Boolean).join(" · "):r.url));row.appendChild(t);
+      var bb=el("div","rbtns");
+      function b(txt,cls,fn,lbl){var x=el("button","btn btn-sm "+cls,txt);x.type="button";if(lbl)x.setAttribute("aria-label",lbl);x.addEventListener("click",fn);bb.appendChild(x)}
+      b("↑","btn-ghost",function(){move(i,-1)},"Move up");b("↓","btn-ghost",function(){move(i,1)},"Move down");b("Edit","btn-ghost",function(){edit(r)});b("Delete","btn-bad",function(){del(r,row,bb)});
+      row.appendChild(bb);l.appendChild(row);
+    });
+  }
+  function commit(msg){
+    var text=JSON.stringify(DATA[KIND],null,2)+"\n";
+    return putFile(PATH[KIND],b64enc(text),msg,SHA[KIND]).then(function(j){SHA[KIND]=j.content.sha})
+      .catch(function(e){if(e.status===409||e.status===422){return load(KIND).then(function(){throw new Error("Someone else changed this list a moment ago. It has been reloaded — please make your change again.")})}throw e});
+  }
+  function fmsg(t,c){$("fMsg").textContent=t;$("fMsg").className="msg"+(c?" "+c:"")}
+  function move(i,d){var a=DATA[KIND],j=i+d;if(j<0||j>=a.length)return;var x=a[i];a[i]=a[j];a[j]=x;render();fmsg("Saving new order…");
+    commit("Reorder "+KIND).then(function(){fmsg("Order saved. Live in about a minute.","good")}).catch(function(e){fmsg(e.message,"bad");render()})}
+  function del(r,row,bb){
+    bb.textContent="";var q=el("span",null,"Delete?");q.style.fontWeight="700";q.style.marginRight="6px";bb.appendChild(q);
+    var y=el("button","btn btn-sm btn-bad","Yes, delete");y.type="button";var n=el("button","btn btn-sm btn-ghost","Keep");n.type="button";bb.appendChild(y);bb.appendChild(n);
+    n.addEventListener("click",render);
+    y.addEventListener("click",function(){DATA[KIND]=DATA[KIND].filter(function(x){return x.id!==r.id});if(EDIT&&EDIT.id===r.id)resetForm();render();fmsg("Deleting…");
+      commit("Remove "+r.name).then(function(){fmsg(r.name+" removed. Live in about a minute.","good")}).catch(function(e){fmsg(e.message,"bad")})});
+  }
+
+  // ---- form ----
+  function slug(s){return (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)||("item-"+Date.now())}
+  function resetForm(){
+    EDIT=null;LOGO=null;$("form").reset();fmsg("");
+    $("fPartner").hidden=KIND!=="partners";$("fPlatform").hidden=KIND!=="platforms";
+    $("formTitle").textContent=KIND==="partners"?"Add a partner":"Add a platform";
+    $("pPrev").textContent="No logo — initials will be shown";$("pSince").value=String(new Date().getFullYear());$("lColor").value="#F2B705";
+    $("lLink").textContent=location.href.replace(/admin\.html.*$/,"")+"?go=…";render();
+  }
+  function edit(r){
+    resetForm();EDIT=r;$("formTitle").textContent="Edit: "+r.name;
+    if(KIND==="partners"){$("pName").value=r.name||"";$("pType").value=r.type||"Tie-up";$("pSince").value=r.since||"";$("pCity").value=r.city||"";$("pUrl").value=r.url||"";$("pDesc").value=r.description||"";
+      if(r.logo){$("pPrev").textContent="";var i=el("img");i.src=r.logo+"?v="+Date.now();i.alt="Current logo";$("pPrev").appendChild(i)}}
+    else{$("lName").value=r.name||"";$("lUrl").value=r.url||"";$("lCat").value=r.category||"";$("lIcon").value=r.icon||"grid";$("lColor").value=r.color||"#F2B705";$("lWakes").value=String(!!r.wakes);$("lDesc").value=r.description||"";
+      $("lLink").textContent=location.href.replace(/admin\.html.*$/,"")+"?go="+r.id}
+    render();$("form").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  $("addNew").addEventListener("click",function(){resetForm();(KIND==="partners"?$("pName"):$("lName")).focus()});
+  $("cancel").addEventListener("click",resetForm);
+  $("pLogo").addEventListener("change",function(){
+    var f=this.files[0];if(!f)return;if(f.size>8*1024*1024){fmsg("That image is over 8 MB. Choose a smaller one.","bad");this.value="";return}
+    var img=new Image(),url=URL.createObjectURL(f);
+    img.onload=function(){var max=480,s=Math.min(1,max/Math.max(img.width,img.height));var c=document.createElement("canvas");c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);
+      c.getContext("2d").drawImage(img,0,0,c.width,c.height);LOGO=c.toDataURL("image/png");URL.revokeObjectURL(url);
+      $("pPrev").textContent="";var p=el("img");p.src=LOGO;p.alt="New logo preview";$("pPrev").appendChild(p)};
+    img.onerror=function(){fmsg("That file couldn't be read as an image.","bad")};img.src=url;
+  });
+  function validUrl(u){return !u||/^https?:\/\/[^\s]+\.[^\s]+/i.test(u)}
+  $("form").addEventListener("submit",function(e){
+    e.preventDefault();var rec,old=EDIT;
+    if(KIND==="partners"){
+      var name=$("pName").value.trim(),url=$("pUrl").value.trim();
+      if(!name){fmsg("Enter the partner's name.","bad");return}
+      if(!validUrl(url)){fmsg("The website must start with https://","bad");return}
+      rec={id:old?old.id:slug(name),name:name,type:$("pType").value,logo:old?old.logo||"":"",city:$("pCity").value.trim(),url:url,description:$("pDesc").value.trim(),since:$("pSince").value.trim()};
+    }else{
+      var n=$("lName").value.trim(),u=$("lUrl").value.trim();
+      if(!n){fmsg("Enter the platform name.","bad");return}
+      if(!u||!validUrl(u)){fmsg("Enter the full link, starting with https://","bad");return}
+      rec={id:old?old.id:slug(n),name:n,url:u,category:$("lCat").value.trim(),color:$("lColor").value,icon:$("lIcon").value,description:$("lDesc").value.trim(),wakes:$("lWakes").value==="true"};
+    }
+    if(!old){var base=rec.id,k=2;while(DATA[KIND].some(function(x){return x.id===rec.id}))rec.id=base+"-"+(k++)}
+    $("save").disabled=true;fmsg("Saving…");
+    var step=Promise.resolve();
+    if(KIND==="partners"&&LOGO){var lp="logos/"+rec.id+"-"+Date.now()+".png";fmsg("Uploading logo…");
+      step=putFile(lp,LOGO.split(",")[1],"Logo for "+rec.name).then(function(){rec.logo=lp})}
+    step.then(function(){
+      if(old)DATA[KIND]=DATA[KIND].map(function(x){return x.id===old.id?rec:x});else DATA[KIND].push(rec);
+      fmsg("Publishing…");return commit((old?"Update ":"Add ")+rec.name);
+    }).then(function(){
+      $("save").disabled=false;var saved=rec.name;resetForm();fmsg(saved+" saved. It appears on the dashboard in about a minute.","good");
+    }).catch(function(e){$("save").disabled=false;fmsg("Couldn't save: "+e.message,"bad");return load(KIND).then(render)});
+  });
+})();
+</script>
+</body>
+</html>

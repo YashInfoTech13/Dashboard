@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Yash Infotech Command Centre</title>
+<meta name="description" content="Yash Infotech Pvt. Ltd., Pune — one place for all our platforms, services, tie-ups and clients.">
+<meta property="og:title" content="Yash Infotech Command Centre">
+<meta property="og:description" content="Every Yash Infotech platform, service and partner in one place.">
+<meta property="og:image" content="img/ylogo.jpg">
+<meta name="theme-color" content="#0F1E4A">
+<link rel="icon" href="img/ylogo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* Layout: a transit-control-room front page. Navy hero with a live metro map whose stations are the platforms,
+   then platform cards with status lights, the four service lines, the partner wall, and contact. */
+:root{
+  --navy:#0F1E4A; --navy-2:#1B2E6B; --gold:#F2B705; --orange:#F26B1D; --teal:#0E9F8E; --blue:#2F6FED;
+  --bg:#F4F6FB; --surface:#FFFFFF; --surface-2:#EBEFF9; --line:#D7DEEF; --fg:#14203F; --muted:#4A5578;
+  --ok:#0B6B34; --ok-bg:#DFF3E6; --warn:#9A5B00; --warn-bg:#FFF1CC; --bad:#B3123F; --bad-bg:#FDEDF2; --eyebrow:#B05300;
+  --display:"Poppins",system-ui,sans-serif; --body:"Plus Jakarta Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#070E28;--surface:#0E1A42;--surface-2:#132353;--line:#263B78;--fg:#EDF1FF;--muted:#AEB9DE;
+  --ok:#7BD9A0;--ok-bg:#12382A;--warn:#FFD06B;--warn-bg:#3A2E10;--bad:#FF8FAE;--bad-bg:#3A1428;--eyebrow:#FFB45E;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#070E28;--surface:#0E1A42;--surface-2:#132353;--line:#263B78;--fg:#EDF1FF;--muted:#AEB9DE;
+  --ok:#7BD9A0;--ok-bg:#12382A;--warn:#FFD06B;--warn-bg:#3A2E10;--bad:#FF8FAE;--bad-bg:#3A1428;--eyebrow:#FFB45E;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;padding-top:env(safe-area-inset-top,0px)}
+img{max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+h2{font-size:clamp(26px,3.4vw,38px);font-weight:800}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--eyebrow)}
+.btn{font:inherit;font-family:var(--display);font-weight:700;font-size:15px;border:0;border-radius:12px;padding:11px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn-gold{background:var(--gold);color:#0F1E4A}
+.btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--fg)}
+.btn-sm{padding:8px 12px;font-size:13.5px;border-radius:10px}
+kbd{font-family:var(--mono);font-size:12px;border:1px solid currentColor;border-radius:6px;padding:1px 6px;opacity:.8}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(15,30,74,.94);backdrop-filter:blur(8px);color:#fff}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:21}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px;flex-wrap:wrap}
+.logo{background:#fff;border-radius:12px;padding:4px 10px;display:inline-flex}
+.logo img{height:40px;display:block}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{text-decoration:none;font-weight:600;font-size:14px;padding:8px 12px;border-radius:10px;color:#D5DCF2}
+.nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+.searchbtn{font:inherit;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.25);color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer;font-size:14px}
+
+/* hero */
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{padding-block:40px 30px;position:relative}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:36px;align-items:center}
+.greet{font-family:var(--mono);font-size:13px;color:#F2B705;letter-spacing:.08em}
+.hero h1{font-size:clamp(36px,5.4vw,64px);font-weight:800;margin-top:12px}
+.hero h1 em{font-style:normal;color:#FF8A3D}
+.lede{font-size:18px;color:#D5DCF2;margin-top:14px;max-width:560px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:26px}
+.stat{border:1.5px solid rgba(242,183,5,.45);border-radius:16px;padding:12px 14px}
+.stat b{display:block;font-family:var(--display);font-size:30px;color:#F2B705;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:#D5DCF2}
+.hactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.4)}
+
+/* metro board */
+.board{background:#0A1638;border:1.5px solid rgba(255,255,255,.12);border-radius:22px;padding:18px 18px 12px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.board-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.board-head b{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:#F2B705}
+.clock{font-family:var(--mono);font-size:13px;color:#D5DCF2;font-variant-numeric:tabular-nums}
+.metro{display:grid;gap:4px;position:relative}
+.metro::before{content:"";position:absolute;left:21px;top:22px;bottom:22px;width:8px;border-radius:8px;background:linear-gradient(#F2B705,#F26B1D,#0E9F8E,#2F6FED,#7A4BD6)}
+.train{position:absolute;left:17px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.25),0 0 18px #fff;top:16px;animation:ride 9s ease-in-out infinite alternate;z-index:1}
+@keyframes ride{to{top:calc(100% - 32px)}}
+.st{all:unset;box-sizing:border-box;position:relative;display:grid;grid-template-columns:50px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 10px 10px 0;border-radius:14px;cursor:pointer;color:#fff}
+.st:hover,.st:focus-visible{background:rgba(255,255,255,.07)}
+.st:focus-visible{outline:3px solid #F2B705}
+.st .dot{justify-self:center;width:28px;height:28px;border-radius:50%;background:#0A1638;border:6px solid var(--c);position:relative;z-index:2}
+.st b{font-family:var(--display);font-size:15.5px;display:block;line-height:1.2}
+.st small{font-size:12.5px;color:#AEB9DE}
+.st .go{font-family:var(--mono);font-size:11.5px;color:#AEB9DE;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.light{width:9px;height:9px;border-radius:50%;background:#7F8BAA;display:inline-block}
+.light.up{background:#3BD17A;box-shadow:0 0 8px #3BD17A}
+.light.wake{background:#F2B705;box-shadow:0 0 8px #F2B705;animation:blink 1s infinite}
+.light.down{background:#7F8BAA}
+@keyframes blink{50%{opacity:.3}}
+.board-foot{font-size:12px;color:#8E9BC4;margin-top:8px}
+
+/* recents */
+.recent{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:18px;font-size:13.5px;color:#D5DCF2}
+.chipbtn{font:inherit;font-size:13px;font-weight:600;background:rgba(255,255,255,.1);border:0;color:#fff;border-radius:999px;padding:5px 12px;cursor:pointer;text-decoration:none}
+
+/* sections */
+section.band{padding-block:64px}
+section.band.alt{background:var(--surface-2)}
+.head{display:flex;flex-direction:column;gap:10px;max-width:760px;margin-bottom:26px}
+.head p{color:var(--muted)}
+.headrow{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.headrow .head{margin-bottom:0}
+
+/* platform cards */
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pcard{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:transform .2s,box-shadow .2s}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(15,30,74,.14)}
+.pstrip{height:8px;background:var(--c)}
+.pbody{padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.ptop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.picon{width:48px;height:48px;border-radius:14px;background:var(--c);color:#0F1E4A;display:grid;place-items:center;flex-shrink:0}
+.picon.dark{color:#fff}
+.stag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.stag.up{background:var(--ok-bg);color:var(--ok)} .stag.wake{background:var(--warn-bg);color:var(--warn)} .stag.down{background:var(--bad-bg);color:var(--bad)}
+.pcard h3{font-size:19px}
+.pcard p{font-size:14.5px;color:var(--muted)}
+.purl{font-family:var(--mono);font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.pcat{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow)}
+.pact{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+
+/* services */
+.sgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.scard{background:var(--surface);border:2px solid var(--c);border-radius:20px;padding:20px;min-width:0}
+.scard .code{font-family:var(--mono);font-size:11.5px;font-weight:700;background:var(--c);color:#0F1E4A;border-radius:6px;padding:3px 8px}
+.scard .free{font-size:11.5px;font-weight:800;color:var(--ok);background:var(--ok-bg);border-radius:6px;padding:3px 8px;margin-left:6px}
+.scard h3{font-size:21px;margin-top:10px}
+.scard .who{font-size:13.5px;color:var(--muted);font-weight:600}
+.scard p{font-size:14.5px;color:var(--muted);margin-top:6px}
+.stops{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:relative;margin-top:16px}
+.stops::before{content:"";position:absolute;left:10%;right:10%;top:9px;height:6px;border-radius:6px;background:var(--c)}
+.stops div{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;position:relative;min-width:0}
+.stops i{width:24px;height:24px;border-radius:50%;background:var(--surface);border:5px solid var(--c)}
+.stops div:last-child i{background:var(--c)}
+.stops span{font-size:11.5px;font-weight:600;line-height:1.25;color:var(--muted)}
+
+/* partners */
+.marquee{overflow:hidden;border-block:1.5px solid var(--line);background:var(--surface);padding-block:14px;margin-bottom:26px;mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mtrack{display:flex;gap:44px;width:max-content;animation:scroll 40s linear infinite;align-items:center}
+.marquee:hover .mtrack{animation-play-state:paused}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.mtrack img{height:52px;width:auto;filter:saturate(1.05)}
+.mtrack .mname{font-family:var(--display);font-weight:700;color:var(--muted);white-space:nowrap}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:700;font-size:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:7px 14px;cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+:root[data-theme="dark"] .tab[aria-pressed="true"]{background:var(--gold);color:#0F1E4A;border-color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-pressed="true"]{background:var(--gold);color:#0F1E4A;border-color:var(--gold)}}
+.tab small{font-family:var(--mono);opacity:.75;margin-left:4px}
+.prgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.prcard{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.plogo{height:96px;border-radius:12px;background:#fff;display:grid;place-items:center;padding:8px;border:1px solid var(--line)}
+.plogo img{max-height:80px;width:auto;max-width:100%;object-fit:contain}
+.plogo .ini{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:22px;color:#fff;background:var(--navy)}
+.ptype{align-self:flex-start;font-size:11.5px;font-weight:800;letter-spacing:.06em;border-radius:6px;padding:2px 8px;color:#0F1E4A}
+.prcard b{font-family:var(--display);font-size:15.5px;line-height:1.25}
+.prcard p{font-size:13.5px;color:var(--muted)}
+.prcard .meta{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.prcard a{font-size:13.5px;font-weight:700}
+.empty{grid-column:1/-1;padding:30px;text-align:center;color:var(--muted);border:1.5px dashed var(--line);border-radius:18px}
+
+/* contact */
+.contact{background:var(--navy);color:#fff}
+.contact .wrap{padding-block:52px;display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:30px;align-items:center}
+.contact h2 em{font-style:normal;color:#FF8A3D}
+.contact p{color:#D5DCF2;margin-top:10px}
+.num{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,40px);letter-spacing:.03em;user-select:all}
+.qrbox{background:#fff;border-radius:18px;padding:12px;text-align:center;color:#0F1E4A;border:4px solid #1FA855}
+.qrbox img{width:150px;height:150px;display:block}
+.qrbox b{font-family:var(--display);font-size:13px;display:block;margin-top:4px}
+.foot{background:#08133A;color:#AEB9DE;font-size:13px}
+.foot .wrap{padding-block:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot a{color:#F2B705}
+
+/* palette + share + redirect overlays */
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(5,10,30,.6);display:grid;place-items:start center;padding:max(60px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+.pal{width:min(640px,100%);background:var(--surface);color:var(--fg);border-radius:18px;box-shadow:0 30px 70px rgba(0,0,0,.45);overflow:hidden}
+.pal input{width:100%;border:0;border-bottom:1.5px solid var(--line);padding:16px 18px;font:inherit;font-size:17px;background:transparent;color:var(--fg);outline:none}
+.pres{max-height:min(420px,60vh);overflow-y:auto;padding:6px}
+.pitem{all:unset;box-sizing:border-box;display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;padding:11px 12px;border-radius:12px;cursor:pointer}
+.pitem[aria-selected="true"]{background:var(--surface-2)}
+.pitem i{width:12px;height:12px;border-radius:50%;background:var(--c)}
+.pitem b{font-weight:700;display:block}
+.pitem small{color:var(--muted);font-size:12.5px}
+.pitem em{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.palfoot{display:flex;gap:14px;padding:10px 16px;border-top:1.5px solid var(--line);font-size:12px;color:var(--muted);flex-wrap:wrap}
+.sharebox{width:min(420px,100%);background:var(--surface);color:var(--fg);border-radius:20px;padding:22px;position:relative;margin-top:4vh;text-align:center}
+.sharebox h3{font-size:19px;padding-right:30px}
+.x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:var(--surface-2);color:var(--fg);font-size:22px;cursor:pointer}
+#qr{display:grid;place-items:center;margin:16px auto;background:#fff;padding:12px;border-radius:14px;width:max-content}
+.linkfield{display:flex;gap:8px;margin-top:6px}
+.linkfield input{flex:1;min-width:0;font:inherit;font-family:var(--mono);font-size:12.5px;padding:10px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg)}
+.redirect{position:fixed;inset:0;z-index:60;background:var(--navy);color:#fff;display:grid;place-items:center;text-align:center;padding:24px}
+.redirect .ring{width:110px;height:110px;border-radius:50%;border:8px solid rgba(255,255,255,.15);border-top-color:#F2B705;margin:0 auto 22px;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.redirect h2{font-size:clamp(24px,4vw,34px)}
+.redirect p{color:#D5DCF2;margin-top:8px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:12px;font-weight:600;z-index:70;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+
+@media (max-width:1000px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.prgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:860px){.hgrid,.contact .wrap{grid-template-columns:minmax(0,1fr)}.sgrid{grid-template-columns:minmax(0,1fr)}.nav{display:none}}
+@media (max-width:560px){.pgrid{grid-template-columns:minmax(0,1fr)}.prgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stops span{display:none}.st .go span{display:none}.searchbtn .lbl{display:none}}
+@media (prefers-reduced-motion:reduce){.train,.mtrack,.redirect .ring,.light.wake{animation:none}.pcard{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="logo" href="#home" aria-label="Yash Infotech home"><img src="img/ylogo.jpg" alt="Yash Infotech Pvt. Ltd."></a>
+  <nav class="nav" aria-label="Sections"><a href="#platforms">Platforms</a><a href="#services">Services</a><a href="#partners">Tie-ups &amp; clients</a><a href="#contact">Contact</a></nav>
+  <button class="searchbtn" type="button" id="openPal" aria-label="Search platforms and services"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="lbl">Jump to…</span><kbd>Ctrl K</kbd></button>
+</div></header>
+
+<section class="hero" id="home">
+  <div class="wrap hgrid">
+    <div>
+      <div class="greet" id="greet">YASH INFOTECH · COMMAND CENTRE</div>
+      <h1>One network.<br><em>Every service.</em></h1>
+      <p class="lede">Every Yash Infotech platform, service line, tie-up and client in one place. Pick a station on the board, or press <kbd>Ctrl K</kbd> and type where you want to go.</p>
+      <div class="stats" aria-label="At a glance">
+        <div class="stat"><b data-count="platforms">0</b><span>Live platforms</span></div>
+        <div class="stat"><b data-count="services">0</b><span>Service lines</span></div>
+        <div class="stat"><b data-count="partners">0</b><span>Tie-ups &amp; clients</span></div>
+        <div class="stat"><b>₹0</b><span>Admission support</span></div>
+      </div>
+      <div class="hactions">
+        <a class="btn btn-gold" href="#platforms">Open a platform</a>
+        <a class="btn btn-ghost" href="#partners">Our tie-ups</a>
+      </div>
+      <div class="recent" id="recentBox" hidden><span>Recently opened:</span></div>
+    </div>
+    <div class="board" aria-labelledby="boardTitle">
+      <div class="board-head"><b id="boardTitle">DEPARTURES · LIVE STATUS</b><span class="clock" id="clock">--:--</span></div>
+      <div class="metro" id="metro"><span class="train" aria-hidden="true"></span></div>
+      <p class="board-foot">Green: online · Amber: waking up (free hosting can take ~30 s) · Grey: open to check · Press a number key to jump.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="platforms">
+  <div class="wrap">
+    <div class="headrow">
+      <div class="head"><span class="eyebrow">Live platforms</span><h2>Everything we run, one tap away</h2>
+        <p>Open any platform, copy its direct link, or show a QR code so someone can scan it from your screen.</p></div>
+      <button class="btn btn-ghost btn-sm" type="button" id="recheck">Re-check status</button>
+    </div>
+    <div class="pgrid" id="pgrid"><div class="empty">Loading platforms…</div></div>
+  </div>
+</section>
+
+<section class="band alt" id="services">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow">Our services</span><h2>Four lines. One team.</h2>
+      <p>From a student's first admission question to a scholar's patent and an institution's new portal — every line runs through the same team.</p></div>
+    <div class="sgrid" id="sgrid"></div>
+  </div>
+</section>
+
+<section class="band" id="partners">
+  <div class="wrap">
+    <div class="headrow">
+      <div class="head"><span class="eyebrow">Tie-ups · Clients · Service partners</span><h2>Who we work with</h2>
+        <p>New tie-ups and clients appear here as soon as our team adds them.</p></div>
+      <div class="tabs" id="ptabs" role="group" aria-label="Filter partners"></div>
+    </div>
+  </div>
+  <div class="marquee" id="marquee" aria-hidden="true"><div class="mtrack" id="mtrack"></div></div>
+  <div class="wrap"><div class="prgrid" id="prgrid"></div></div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Let's build your <em>next stop</em> together.</h2>
+      <p>Want a tie-up, a portal or a dashboard like these for your institution? Talk to our team.</p>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px"><span class="num" id="num">90223 58855</span><button class="btn btn-ghost btn-sm" style="color:#fff;border-color:rgba(255,255,255,.5)" type="button" id="copyNum">Copy number</button></div>
+      <p style="margin-top:8px">Yash Infotech Pvt. Ltd. · Pune, Maharashtra</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+        <a class="btn btn-gold" href="https://wa.me/919022358855?text=Hello%20Yash%20Infotech%2C%20I%20saw%20your%20dashboard." target="_blank" rel="noopener">Chat on WhatsApp</a>
+        <a class="btn" style="background:#1FA855;color:#fff" href="https://chat.whatsapp.com/HsiAVZe4rYoAvf65v9f6CT" target="_blank" rel="noopener">Join admission group</a>
+      </div>
+    </div>
+    <div class="qrbox"><img src="img/wa_qr.png" alt="QR code to join the Admission Counselling WhatsApp group"><b>Free admission<br>WhatsApp group</b></div>
+  </div>
+</section>
+<footer class="foot"><div class="wrap"><span>© Yash Infotech Pvt. Ltd., Pune · Research | Innovation | Excellence</span><a href="admin.html">Team login</a></div></footer>
+
+<!-- command palette -->
+<div class="overlay" id="pal" hidden role="dialog" aria-modal="true" aria-label="Jump to">
+  <div class="pal">
+    <label for="palIn" style="position:absolute;left:-9999px">Search</label>
+    <input id="palIn" placeholder="Type a platform, service or partner…" autocomplete="off" role="combobox" aria-controls="palRes" aria-expanded="true">
+    <div class="pres" id="palRes" role="listbox"></div>
+    <div class="palfoot"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span></div>
+  </div>
+</div>
+
+<!-- share -->
+<div class="overlay" id="share" hidden role="dialog" aria-modal="true" aria-labelledby="shTitle">
+  <div class="sharebox">
+    <button class="x" type="button" id="shClose" aria-label="Close">×</button>
+    <h3 id="shTitle">Share</h3>
+    <p style="color:var(--muted);font-size:14px;margin-top:4px">Scan to open, or copy the direct link.</p>
+    <div id="qr"></div>
+    <div class="linkfield"><label for="shLink" style="position:absolute;left:-9999px">Direct link</label><input id="shLink" readonly><button class="btn btn-gold btn-sm" type="button" id="shCopy">Copy</button></div>
+    <p style="color:var(--muted);font-size:12.5px;margin-top:10px">This link opens through the Yash Infotech dashboard, so it keeps working even if the platform's address changes.</p>
+  </div>
+</div>
+
+<div class="redirect" id="redirect" hidden><div><div class="ring" aria-hidden="true"></div><h2 id="rdTitle">Taking you there…</h2><p id="rdSub"></p><p style="margin-top:18px"><a class="btn btn-gold" id="rdNow" href="#">Open now</a> <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.4)" href="./" id="rdStay">Stay on dashboard</a></p></div></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||"null");localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+  function toast(t){var b=$("toast");b.textContent=t;b.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){b.hidden=true},2400)}
+  var BASE=location.href.split("#")[0].split("?")[0];
+  var ICONS={
+    book:'<path d="M2 4h7a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2ZM22 4h-7a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8Z"/>',
+    users:'<circle cx="9" cy="7" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M16 3.5a4 4 0 0 1 0 7M22 21c0-3-2-5-4-5.6"/>',
+    award:'<circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 8 5-3 5 3-1.5-8"/>',
+    globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/>',
+    route:'<circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h6"/>',
+    chart:'<path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/>',
+    grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+    link:'<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/>'
+  };
+  function icon(n,size){return '<svg width="'+(size||24)+'" height="'+(size||24)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICONS[n]||ICONS.link)+'</svg>'}
+  function darkText(hex){var c=hex.replace("#","");var r=parseInt(c.substr(0,2),16),g=parseInt(c.substr(2,2),16),b=parseInt(c.substr(4,2),16);return (r*299+g*587+b*114)/1000>150}
+  function safeUrl(u){return /^https?:\/\//i.test(u||"")?u:""}
+
+  var P=[],S=[],R=[],STATUS={};
+  function getJSON(p){return fetch(p+"?v="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).catch(function(){return[]})}
+
+  // greeting + clock (India time)
+  function tick(){
+    var now=new Date();var h=Number(now.toLocaleString("en-IN",{hour:"numeric",hour12:false,timeZone:"Asia/Kolkata"}));
+    var g=h<12?"GOOD MORNING":h<17?"GOOD AFTERNOON":"GOOD EVENING";
+    $("greet").textContent=g+" · YASH INFOTECH COMMAND CENTRE";
+    $("clock").textContent=now.toLocaleString("en-IN",{weekday:"short",hour:"2-digit",minute:"2-digit",timeZone:"Asia/Kolkata"})+" IST";
+  }
+  tick();setInterval(tick,30000);
+
+  function count(key,n){var b=document.querySelector('[data-count="'+key+'"]');if(!b)return;var s=0,steps=24;var still=matchMedia("(prefers-reduced-motion: reduce)").matches;if(still){b.textContent=n;return}
+    var t=setInterval(function(){s++;b.textContent=Math.round(n*s/steps);if(s>=steps)clearInterval(t)},30)}
+
+  // ----- deep link redirect: ?go=<id> -----
+  var GO=new URLSearchParams(location.search).get("go");
+  function doRedirect(){
+    var p=P.find(function(x){return x.id===GO});
+    if(!p){if(GO)toast("That link isn't on the dashboard any more.");return}
+    var url=safeUrl(p.url);if(!url)return;
+    $("redirect").hidden=false;$("rdTitle").textContent="Taking you to "+p.name+"…";
+    $("rdSub").textContent=p.wakes?"This platform is on free hosting and may take up to 30 seconds to wake up.":"Opening in a moment.";
+    $("rdNow").href=url;remember(p);
+    setTimeout(function(){location.replace(url)},1600);
+  }
+
+  // ----- status check (reachability, best effort) -----
+  function check(p){
+    var url=safeUrl(p.url);if(!url)return;
+    STATUS[p.id]="checking";paintStatus(p.id);
+    var slow=setTimeout(function(){if(STATUS[p.id]==="checking"){STATUS[p.id]="wake";paintStatus(p.id)}},3500);
+    var ctrl=window.AbortController?new AbortController():null;var kill=setTimeout(function(){if(ctrl)ctrl.abort()},45000);
+    fetch(url,{mode:"no-cors",cache:"no-store",signal:ctrl?ctrl.signal:undefined}).then(function(){STATUS[p.id]="up"}).catch(function(){STATUS[p.id]="down"})
+      .then(function(){clearTimeout(slow);clearTimeout(kill);paintStatus(p.id)});
+  }
+  var LABEL={checking:"Checking…",wake:"Waking up",up:"Reachable",down:"Tap to open"};
+  function paintStatus(id){
+    var s=STATUS[id]||"checking";
+    Array.prototype.forEach.call(document.querySelectorAll('[data-light="'+id+'"]'),function(n){n.className="light "+(s==="up"?"up":s==="wake"||s==="checking"?"wake":"down")});
+    Array.prototype.forEach.call(document.querySelectorAll('[data-tag="'+id+'"]'),function(n){n.className="stag "+(s==="up"?"up":s==="down"?"":"wake");n.lastChild.textContent=LABEL[s]});
+  }
+
+  function remember(p){var r=store("yi-recent")||[];r=r.filter(function(x){return x!==p.id});r.unshift(p.id);store("yi-recent",r.slice(0,4));renderRecent()}
+  function renderRecent(){
+    var r=(store("yi-recent")||[]).map(function(id){return P.find(function(x){return x.id===id})}).filter(Boolean);
+    var box=$("recentBox");Array.prototype.slice.call(box.querySelectorAll("a")).forEach(function(n){n.remove()});
+    box.hidden=!r.length;r.forEach(function(p){var a=el("a","chipbtn",p.name);a.href=safeUrl(p.url);a.target="_blank";a.rel="noopener";a.addEventListener("click",function(){remember(p)});box.appendChild(a)});
+  }
+  function open(p){var u=safeUrl(p.url);if(!u)return;remember(p);window.open(u,"_blank","noopener")}
+
+  // ----- board -----
+  function renderBoard(){
+    var m=$("metro");Array.prototype.slice.call(m.querySelectorAll(".st")).forEach(function(n){n.remove()});
+    P.forEach(function(p,i){
+      var b=el("button","st");b.type="button";b.style.setProperty("--c",p.color||"#F2B705");
+      b.setAttribute("aria-label","Open "+p.name);
+      b.appendChild(el("span","dot"));
+      var t=el("span");t.appendChild(el("b",null,p.name));t.appendChild(el("small",null,p.category||""));b.appendChild(t);
+      var g=el("span","go");var l=el("span","light");l.setAttribute("data-light",p.id);g.appendChild(l);if(i<9){var k=el("span",null,"key "+(i+1));g.appendChild(k)}b.appendChild(g);
+      b.addEventListener("click",function(){open(p)});m.appendChild(b);
+    });
+  }
+  // ----- platform cards -----
+  function renderCards(){
+    var g=$("pgrid");g.textContent="";
+    if(!P.length){g.appendChild(el("div","empty","No platforms yet. Add them from Team login."));return}
+    P.forEach(function(p){
+      var c=el("article","pcard");c.style.setProperty("--c",p.color||"#F2B705");
+      c.appendChild(el("div","pstrip"));var b=el("div","pbody");
+      var top=el("div","ptop");var ic=el("div","picon"+(darkText(p.color||"#F2B705")?"":" dark"));ic.innerHTML=icon(p.icon,26);top.appendChild(ic);
+      var tag=el("span","stag");tag.setAttribute("data-tag",p.id);tag.appendChild(el("span","light"));tag.firstChild.setAttribute("data-light",p.id);tag.appendChild(document.createTextNode("Checking…"));top.appendChild(tag);b.appendChild(top);
+      b.appendChild(el("span","pcat",p.category||""));b.appendChild(el("h3",null,p.name));b.appendChild(el("p",null,p.description||""));
+      var host="";try{host=new URL(p.url).host}catch(e){}b.appendChild(el("span","purl",host));
+      var act=el("div","pact");
+      var a=el("a","btn btn-gold btn-sm","Open");a.href=safeUrl(p.url);a.target="_blank";a.rel="noopener";a.addEventListener("click",function(){remember(p)});act.appendChild(a);
+      var s=el("button","btn btn-ghost btn-sm","Share / QR");s.type="button";s.addEventListener("click",function(){share(p)});act.appendChild(s);
+      b.appendChild(act);c.appendChild(b);g.appendChild(c);
+    });
+  }
+  // ----- services -----
+  function renderServices(){
+    var g=$("sgrid");g.textContent="";
+    S.forEach(function(s){
+      var c=el("article","scard");c.style.setProperty("--c",s.color);
+      var h=el("div");h.appendChild(el("span","code",s.code));if(s.free)h.appendChild(el("span","free","100% FREE"));c.appendChild(h);
+      c.appendChild(el("h3",null,s.name+" Line"));c.appendChild(el("div","who",s.who));c.appendChild(el("p",null,s.description));
+      var st=el("div","stops");(s.stops||[]).forEach(function(x){var d=el("div");d.appendChild(el("i"));d.appendChild(el("span",null,x));st.appendChild(d)});c.appendChild(st);
+      g.appendChild(c);
+    });
+  }
+  // ----- partners -----
+  var TYPECOL={"Tie-up":"#F2B705","Client":"#7FA8F7","Service partner":"#5FD3C4"};
+  var pf="All";
+  function initials(n){return n.split(/\s+/).filter(function(w){return /^[A-Za-z]/.test(w)}).slice(0,2).map(function(w){return w[0]}).join("").toUpperCase()}
+  function logoBox(r){var box=el("div","plogo");if(r.logo){var img=el("img");img.src=r.logo;img.alt=r.name+" logo";img.loading="lazy";img.onerror=function(){box.textContent="";box.appendChild(el("span","ini",initials(r.name)))};box.appendChild(img)}else box.appendChild(el("span","ini",initials(r.name)));return box}
+  function renderPartners(){
+    var types=["All","Tie-up","Client","Service partner"];var tabs=$("ptabs");tabs.textContent="";
+    types.forEach(function(t){var n=t==="All"?R.length:R.filter(function(r){return r.type===t}).length;if(t!=="All"&&!n)return;
+      var b=el("button","tab",t==="All"?"All":t+(t.endsWith("s")?"":"s"));b.type="button";b.setAttribute("aria-pressed",pf===t?"true":"false");b.appendChild(el("small",null,String(n)));
+      b.addEventListener("click",function(){pf=t;renderPartners()});tabs.appendChild(b)});
+    var g=$("prgrid");g.textContent="";
+    var rows=R.filter(function(r){return pf==="All"||r.type===pf});
+    if(!rows.length)g.appendChild(el("div","empty","No partners in this group yet."));
+    rows.forEach(function(r){
+      var c=el("article","prcard");c.appendChild(logoBox(r));
+      var t=el("span","ptype",r.type||"Tie-up");t.style.background=TYPECOL[r.type]||"#F2B705";c.appendChild(t);
+      c.appendChild(el("b",null,r.name));if(r.description)c.appendChild(el("p",null,r.description));
+      var meta=[r.city,r.since?"since "+r.since:""].filter(Boolean).join(" · ");if(meta)c.appendChild(el("span","meta",meta));
+      if(safeUrl(r.url)){var a=el("a",null,"Visit website →");a.href=r.url;a.target="_blank";a.rel="noopener";c.appendChild(a)}
+      g.appendChild(c);
+    });
+    var m=$("mtrack");m.textContent="";
+    var list=R.concat(R);list.forEach(function(r){if(r.logo){var i=el("img");i.src=r.logo;i.alt="";i.onerror=function(){i.replaceWith(el("span","mname",r.name))};m.appendChild(i)}else m.appendChild(el("span","mname",r.name))});
+    $("marquee").hidden=R.length<3;
+  }
+
+  // ----- share / QR -----
+  var curShare=null;
+  function share(p){
+    curShare=p;var link=BASE+"?go="+encodeURIComponent(p.id);
+    $("shTitle").textContent=p.name;$("shLink").value=link;var q=$("qr");q.textContent="";
+    if(window.QRCode)new QRCode(q,{text:link,width:200,height:200,colorDark:"#0F1E4A",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+    else q.appendChild(el("p",null,"QR code unavailable offline."));
+    $("share").hidden=false;$("shCopy").focus();
+  }
+  function closeShare(){$("share").hidden=true}
+  $("shClose").addEventListener("click",closeShare);
+  $("share").addEventListener("click",function(e){if(e.target===this)closeShare()});
+  function copy(text,input){
+    try{navigator.clipboard.writeText(text).then(function(){toast("Copied")},function(){if(input){input.select();toast("Selected — press Ctrl C")}})}catch(e){if(input){input.select();toast("Selected — press Ctrl C")}}
+  }
+  $("shCopy").addEventListener("click",function(){copy($("shLink").value,$("shLink"))});
+  $("copyNum").addEventListener("click",function(){copy("9022358855")});
+
+  // ----- command palette -----
+  var items=[],sel=0;
+  function buildItems(){
+    items=[];
+    P.forEach(function(p,i){items.push({k:"Platform",n:p.name,d:p.description,c:p.color,run:function(){open(p)},hint:i<9?"key "+(i+1):""})});
+    S.forEach(function(s){items.push({k:"Service",n:s.name+" Line",d:s.who,c:s.color,run:function(){location.hash="services"}})});
+    R.forEach(function(r){items.push({k:r.type||"Partner",n:r.name,d:r.city||"",c:TYPECOL[r.type]||"#F2B705",run:function(){if(safeUrl(r.url))window.open(r.url,"_blank","noopener");else location.hash="partners"}})});
+    items.push({k:"Contact",n:"WhatsApp Yash Infotech",d:"90223 58855",c:"#1FA855",run:function(){window.open("https://wa.me/919022358855","_blank","noopener")}});
+    items.push({k:"Team",n:"Team login (add partners & platforms)",d:"admin.html",c:"#0F1E4A",run:function(){location.href="admin.html"}});
+  }
+  function renderPal(){
+    var q=$("palIn").value.trim().toLowerCase();var res=$("palRes");res.textContent="";
+    var list=items.filter(function(it){return !q||(it.n+" "+it.d+" "+it.k).toLowerCase().indexOf(q)>=0});
+    sel=Math.min(sel,Math.max(0,list.length-1));
+    if(!list.length)res.appendChild(el("p",null,"No match. Try “admission”, “360”, or a college name.")).style.padding="14px";
+    list.forEach(function(it,i){var b=el("button","pitem");b.type="button";b.setAttribute("role","option");b.setAttribute("aria-selected",i===sel?"true":"false");b.style.setProperty("--c",it.c);
+      b.appendChild(el("i"));var t=el("span");t.appendChild(el("b",null,it.n));t.appendChild(el("small",null,it.d||""));b.appendChild(t);b.appendChild(el("em",null,it.k+(it.hint?" · "+it.hint:"")));
+      b.addEventListener("click",function(){closePal();it.run()});b.addEventListener("mousemove",function(){if(sel!==i){sel=i;Array.prototype.forEach.call(res.children,function(x,j){x.setAttribute("aria-selected",j===i?"true":"false")})}});res.appendChild(b)});
+    renderPal.list=list;
+  }
+  function openPal(){buildItems();$("pal").hidden=false;$("palIn").value="";sel=0;renderPal();$("palIn").focus()}
+  function closePal(){$("pal").hidden=true}
+  $("openPal").addEventListener("click",openPal);
+  $("pal").addEventListener("click",function(e){if(e.target===this)closePal()});
+  $("palIn").addEventListener("input",function(){sel=0;renderPal()});
+  $("palIn").addEventListener("keydown",function(e){
+    var L=renderPal.list||[];
+    if(e.key==="ArrowDown"){e.preventDefault();sel=Math.min(L.length-1,sel+1);renderPal();scrollSel()}
+    else if(e.key==="ArrowUp"){e.preventDefault();sel=Math.max(0,sel-1);renderPal();scrollSel()}
+    else if(e.key==="Enter"&&L[sel]){e.preventDefault();closePal();L[sel].run()}
+  });
+  function scrollSel(){var n=$("palRes").children[sel];if(n&&n.scrollIntoView)n.scrollIntoView({block:"nearest"})}
+  document.addEventListener("keydown",function(e){
+    var typing=/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||"");
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();$("pal").hidden?openPal():closePal();return}
+    if(e.key==="Escape"){if(!$("pal").hidden)closePal();if(!$("share").hidden)closeShare();return}
+    if(typing||e.ctrlKey||e.metaKey||e.altKey||!$("pal").hidden||!$("share").hidden)return;
+    if(e.key==="/"){e.preventDefault();openPal();return}
+    var n=parseInt(e.key,10);if(n>=1&&n<=9&&P[n-1]){open(P[n-1])}
+  });
+  $("recheck").addEventListener("click",function(){P.forEach(check);toast("Checking every platform again")});
+
+  Promise.all([getJSON("data/platforms.json"),getJSON("data/services.json"),getJSON("data/partners.json")]).then(function(a){
+    P=a[0]||[];S=a[1]||[];R=a[2]||[];
+    if(GO){doRedirect();if(P.find(function(x){return x.id===GO}))return}
+    renderBoard();renderCards();renderServices();renderPartners();renderRecent();
+    count("platforms",P.length);count("services",S.length);count("partners",R.length);
+    P.forEach(check);
+  });
+})();
+</script>
+</body>
+</html>

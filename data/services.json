@@ -1,0 +1,6 @@
+[
+  {"id":"adm","code":"LINE 1","name":"Admission","color":"#F2B705","free":true,"who":"Students & parents","description":"Free counselling to a confirmed seat — every branch, every field. No CET, low score or missed form? We still help.","stops":["Free counselling","Course & college shortlist","Eligibility & CET","Forms & documents","Confirmed seat"]},
+  {"id":"res","code":"LINE 2","name":"Research","color":"#F26B1D","free":false,"who":"M.Tech & Ph.D. scholars","description":"Stage-by-stage research mentoring from topic to viva — your research stays your own.","stops":["Topic & proposal","Literature & gap","Methodology","Implementation","Thesis & viva prep"]},
+  {"id":"pub","code":"LINE 3","name":"Publication & IPR","color":"#0E9F8E","free":false,"who":"Researchers & academicians","description":"Ethical, plagiarism-checked publication guidance plus copyright, patent and trademark support.","stops":["Manuscript editing","Journal selection","Submission & revisions","Copyright","Patent & trademark"]},
+  {"id":"tech","code":"LINE 4","name":"Tech Solutions","color":"#2F6FED","free":false,"who":"Institutions, startups & industry","description":"Dashboards, portals, websites and AI / IoT solutions — Ideate · Build · Automate · Achieve.","stops":["AI & ML","IoT & edge","Cloud","Data analytics","Software & portals"]}
+]
