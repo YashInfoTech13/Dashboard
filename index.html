@@ -223,7 +223,11 @@ section.band.alt{background:var(--surface-2)}
 .pitem b{font-weight:700;display:block}
 .pitem small{color:var(--muted);font-size:12.5px}
 .pitem em{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
-.palfoot{display:flex;gap:14px;padding:10px 16px;border-top:1.5px solid var(--line);font-size:12px;color:var(--muted);flex-wrap:wrap}
+.palfoot{display:flex;gap:16px;padding:10px 16px;border-top:1.5px solid var(--line);font-size:13px;color:var(--muted);flex-wrap:wrap;align-items:center}
+.pf{display:inline-flex;align-items:center;gap:6px}
+.pk{font:inherit;font-family:var(--mono);font-size:13px;font-weight:700;min-width:36px;height:32px;padding:0 10px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface-2);color:var(--fg);cursor:pointer}
+.pk:hover{border-color:var(--gold);background:var(--surface)}
+.pk:active{transform:translateY(1px)}
 .sharebox{width:min(420px,100%);background:var(--surface);color:var(--fg);border-radius:20px;padding:22px;position:relative;margin-top:4vh;text-align:center}
 .sharebox h3{font-size:19px;padding-right:30px}
 .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:var(--surface-2);color:var(--fg);font-size:22px;cursor:pointer}
@@ -338,7 +342,7 @@ section.band.alt{background:var(--surface-2)}
     <label for="palIn" style="position:absolute;left:-9999px">Search</label>
     <input id="palIn" placeholder="Type a platform, service or partner…" autocomplete="off" role="combobox" aria-controls="palRes" aria-expanded="true">
     <div class="pres" id="palRes" role="listbox"></div>
-    <div class="palfoot"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span></div>
+    <div class="palfoot"><span class="pf"><button type="button" class="pk" id="pfUp" aria-label="Move up">↑</button><button type="button" class="pk" id="pfDown" aria-label="Move down">↓</button> move</span><span class="pf"><button type="button" class="pk" id="pfOpen">Enter</button> open</span><span class="pf"><button type="button" class="pk" id="pfClose">Esc</button> close</span></div>
   </div>
 </div>
 
@@ -622,6 +626,11 @@ section.band.alt{background:var(--surface-2)}
   });
   var lastMX=-1,lastMY=-1;
   function markSel(scroll){var kids=$("palRes").querySelectorAll(".pitem");Array.prototype.forEach.call(kids,function(x,j){x.setAttribute("aria-selected",j===sel?"true":"false")});if(scroll&&kids[sel])kids[sel].scrollIntoView({block:"nearest"})}
+  function palMove(d){var L=renderPal.list||[];if(!L.length)return;sel=(sel+d+L.length)%L.length;markSel(true);$("palIn").focus()}
+  $("pfUp").addEventListener("click",function(){palMove(-1)});
+  $("pfDown").addEventListener("click",function(){palMove(1)});
+  $("pfOpen").addEventListener("click",function(){var L=renderPal.list||[];if(L[sel]){var it=L[sel];closePal();it.run()}});
+  $("pfClose").addEventListener("click",function(){closePal()});
   function scrollSel(){var n=$("palRes").children[sel];if(n&&n.scrollIntoView)n.scrollIntoView({block:"nearest"})}
   document.addEventListener("keydown",function(e){
     var typing=/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||"");
