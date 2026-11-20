@@ -20,16 +20,6 @@
     "since": "2026"
   },
   {
-    "id": "zeal",
-    "name": "ZEAL College of Engineering",
-    "type": "Tie-up",
-    "logo": "logos/zeal_full.jpg",
-    "city": "Pune",
-    "url": "",
-    "description": "Academic partner institution for Admission Connect 2027–28.",
-    "since": "2026"
-  },
-  {
     "id": "alard",
     "name": "ALARD University",
     "type": "Tie-up",
