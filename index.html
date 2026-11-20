@@ -125,20 +125,46 @@ section.band.alt{background:var(--surface-2)}
 .pcat{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow)}
 .pact{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
 
-/* services */
-.sgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.scard{background:var(--surface);border:2px solid var(--c);border-radius:20px;padding:20px;min-width:0}
-.scard .code{font-family:var(--mono);font-size:11.5px;font-weight:700;background:var(--c);color:#0F1E4A;border-radius:6px;padding:3px 8px}
-.scard .free{font-size:11.5px;font-weight:800;color:var(--ok);background:var(--ok-bg);border-radius:6px;padding:3px 8px;margin-left:6px}
-.scard h3{font-size:21px;margin-top:10px}
-.scard .who{font-size:13.5px;color:var(--muted);font-weight:600}
-.scard p{font-size:14.5px;color:var(--muted);margin-top:6px}
-.stops{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:relative;margin-top:16px}
-.stops::before{content:"";position:absolute;left:10%;right:10%;top:9px;height:6px;border-radius:6px;background:var(--c)}
-.stops div{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;position:relative;min-width:0}
-.stops i{width:24px;height:24px;border-radius:50%;background:var(--surface);border:5px solid var(--c)}
-.stops div:last-child i{background:var(--c)}
-.stops span{font-size:11.5px;font-weight:600;line-height:1.25;color:var(--muted)}
+/* services explorer */
+.picker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.pick{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:14px 34px 14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0;position:relative;transition:border-color .2s,transform .2s}
+.pick:hover{transform:translateY(-2px)}
+.pick:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.pick[aria-selected="true"]{border-color:var(--c);box-shadow:0 0 0 3px var(--c) inset}
+.pick .iam{font-size:12.5px;font-weight:700;color:var(--muted)}
+.pick b{font-family:var(--display);font-size:17px;line-height:1.2}
+.pick i{position:absolute;top:14px;right:14px;width:14px;height:14px;border-radius:50%;background:var(--c)}
+.sdetail{background:var(--surface);border:2px solid var(--c);border-radius:24px;overflow:hidden}
+.sd-top{background:var(--c);color:#0F1E4A;padding:22px 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-end}
+.sd-top.dark{color:#fff}
+.sd-top .code{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em}
+.sd-top h3{font-size:clamp(24px,3vw,32px);margin-top:4px}
+.sd-top p{font-size:16.5px;max-width:640px;margin-top:6px;font-weight:500}
+.price{font-weight:800;font-size:13.5px;background:rgba(255,255,255,.9);color:#0F1E4A;border-radius:999px;padding:6px 14px;white-space:nowrap}
+.sd-body{padding:22px 24px 24px;display:grid;gap:22px}
+.twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.box{background:var(--bg);border-radius:16px;padding:16px 18px}
+.box h4{font-family:var(--display);font-size:16px;margin:0 0 8px}
+.box ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.box li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;font-size:14.5px;line-height:1.45}
+.box li::before{content:"";width:18px;height:18px;border-radius:50%;margin-top:2px;background:var(--c) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F1E4A' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center/12px no-repeat}
+.box.q li::before{background:var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A5578' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M12 8v5M12 16.5v.5'/%3E%3C/svg%3E") center/12px no-repeat;border:1.5px solid var(--line)}
+.journey h4{font-family:var(--display);font-size:16px;margin:0 0 12px}
+.jsteps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;position:relative;list-style:none;margin:0;padding:0}
+.jsteps::before{content:"";position:absolute;left:16px;right:16px;top:15px;height:6px;border-radius:6px;background:var(--c)}
+.jsteps li{position:relative;min-width:0}
+.jsteps .n{width:36px;height:36px;border-radius:50%;background:var(--surface);border:5px solid var(--c);display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:13px;position:relative}
+.jsteps li:last-child .n{background:var(--c);color:#0F1E4A}
+.jsteps b{display:block;font-family:var(--display);font-size:14.5px;margin-top:8px;line-height:1.25}
+.jsteps span{display:block;font-size:13px;color:var(--muted);line-height:1.4;margin-top:3px}
+.snote{display:block;border-left:5px solid var(--c);background:var(--bg);border-radius:0 12px 12px 0;padding:12px 14px;font-size:14px;color:var(--muted)}
+.snote b{color:var(--fg)}
+.scta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.howall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+.howall div{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px}
+.howall b{font-family:var(--display);display:block;font-size:15.5px}
+.howall span{font-size:13.5px;color:var(--muted)}
+.howall em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--eyebrow);font-weight:700}
 
 /* partners */
 .marquee{overflow:hidden;border-block:1.5px solid var(--line);background:var(--surface);padding-block:14px;margin-bottom:26px;mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
@@ -204,8 +230,8 @@ section.band.alt{background:var(--surface-2)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:12px;font-weight:600;z-index:70;box-shadow:0 10px 30px rgba(0,0,0,.3)}
 
 @media (max-width:1000px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.prgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:860px){.hgrid,.contact .wrap{grid-template-columns:minmax(0,1fr)}.sgrid{grid-template-columns:minmax(0,1fr)}.nav{display:none}}
-@media (max-width:560px){.pgrid{grid-template-columns:minmax(0,1fr)}.prgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stops span{display:none}.st .go span{display:none}.searchbtn .lbl{display:none}}
+@media (max-width:860px){.picker{grid-template-columns:repeat(2,minmax(0,1fr))}.twocol,.howall{grid-template-columns:minmax(0,1fr)}.jsteps{grid-template-columns:minmax(0,1fr);gap:14px}.jsteps::before{left:15px;right:auto;top:16px;bottom:16px;width:6px;height:auto}.jsteps li{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:12px}.jsteps li .n{grid-row:span 2}.jsteps b{margin-top:2px}.hgrid,.contact .wrap{grid-template-columns:minmax(0,1fr)}.sgrid{grid-template-columns:minmax(0,1fr)}.nav{display:none}}
+@media (max-width:560px){.pgrid{grid-template-columns:minmax(0,1fr)}.prgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.st .go span{display:none}.searchbtn .lbl{display:none}}
 @media (prefers-reduced-motion:reduce){.train,.mtrack,.redirect .ring,.light.wake{animation:none}.pcard{transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -256,9 +282,16 @@ section.band.alt{background:var(--surface-2)}
 
 <section class="band alt" id="services">
   <div class="wrap">
-    <div class="head"><span class="eyebrow">Our services</span><h2>Four lines. One team.</h2>
-      <p>From a student's first admission question to a scholar's patent and an institution's new portal — every line runs through the same team.</p></div>
-    <div class="sgrid" id="sgrid"></div>
+    <div class="head"><span class="eyebrow">Our services · explained simply</span><h2>What can Yash Infotech do for you?</h2>
+      <p>We run four service lines. Pick who you are below to see, in plain words, who it is for, what you get, how it works step by step and what it costs.</p></div>
+    <div class="picker" id="picker" role="tablist" aria-label="Choose a service"></div>
+    <div id="sdetail" role="tabpanel" aria-live="polite"></div>
+    <div class="howall" aria-label="How every service works">
+      <div><em>01</em><b>Talk to us</b><span>Call or WhatsApp 90223 58855. The first conversation is always free.</span></div>
+      <div><em>02</em><b>Get a clear plan</b><span>We tell you exactly what we will do, how long it takes and any cost, before we start.</span></div>
+      <div><em>03</em><b>We work with you</b><span>One point of contact, regular updates and honest advice at every step.</span></div>
+      <div><em>04</em><b>Stay updated</b><span>We keep you posted on WhatsApp at every step, until the work is done.</span></div>
+    </div>
   </div>
 </section>
 
@@ -417,17 +450,44 @@ section.band.alt{background:var(--surface-2)}
       b.appendChild(act);c.appendChild(b);g.appendChild(c);
     });
   }
-  // ----- services -----
+  // ----- services explorer -----
+  var IAM={adm:"I'm a student or parent",res:"I'm an M.Tech / Ph.D. scholar",pub:"I want to publish or protect an idea",tech:"I'm a college or business"};
+  var curSvc=null;
   function renderServices(){
-    var g=$("sgrid");g.textContent="";
+    var pk=$("picker");pk.textContent="";
     S.forEach(function(s){
-      var c=el("article","scard");c.style.setProperty("--c",s.color);
-      var h=el("div");h.appendChild(el("span","code",s.code));if(s.free)h.appendChild(el("span","free","100% FREE"));c.appendChild(h);
-      c.appendChild(el("h3",null,s.name+" Line"));c.appendChild(el("div","who",s.who));c.appendChild(el("p",null,s.description));
-      var st=el("div","stops");(s.stops||[]).forEach(function(x){var d=el("div");d.appendChild(el("i"));d.appendChild(el("span",null,x));st.appendChild(d)});c.appendChild(st);
-      g.appendChild(c);
+      var b=el("button","pick");b.type="button";b.setAttribute("role","tab");b.id="tab-"+s.id;b.style.setProperty("--c",s.color);
+      b.appendChild(el("i"));b.appendChild(el("span","iam",IAM[s.id]||s.who));b.appendChild(el("b",null,s.name));
+      b.addEventListener("click",function(){showService(s.id,true)});pk.appendChild(b);
     });
+    var h=(location.hash.match(/^#service-(\w+)/)||[])[1];
+    showService(h&&S.some(function(x){return x.id===h})?h:(S[0]&&S[0].id),false);
   }
+  function list(title,arr,cls){var bx=el("div","box"+(cls?" "+cls:""));bx.appendChild(el("h4",null,title));var ul=el("ul");(arr||[]).forEach(function(t){ul.appendChild(el("li",null,t))});bx.appendChild(ul);return bx}
+  function showService(id,user){
+    var s=S.find(function(x){return x.id===id});if(!s)return;curSvc=id;
+    Array.prototype.forEach.call($("picker").children,function(b){b.setAttribute("aria-selected",b.id==="tab-"+id?"true":"false")});
+    var d=$("sdetail");d.textContent="";var w=el("article","sdetail");w.style.setProperty("--c",s.color);
+    var top=el("div","sd-top"+(darkText(s.color)?"":" dark"));var tl=el("div");tl.appendChild(el("span","code",s.code+" · FOR "+String(s.who).toUpperCase()));tl.appendChild(el("h3",null,s.name));tl.appendChild(el("p",null,s.tagline||s.description||""));top.appendChild(tl);
+    top.appendChild(el("span","price",s.free?"✓ "+(s.price||"Free"):(s.price||"")));w.appendChild(top);
+    var body=el("div","sd-body");
+    var two=el("div","twocol");two.appendChild(list("Is this for you?",s.forYou,"q"));two.appendChild(list("What you get",s.gets));body.appendChild(two);
+    var j=el("div","journey");j.appendChild(el("h4",null,"How it works, step by step"));var ol=el("ol","jsteps");
+    (s.stops||[]).forEach(function(x,i){var o=typeof x==="string"?{t:x,d:""}:x;var li=el("li");li.appendChild(el("span","n",String(i+1)));li.appendChild(el("b",null,o.t));if(o.d)li.appendChild(el("span",null,o.d));ol.appendChild(li)});
+    j.appendChild(ol);body.appendChild(j);
+    if(s.note){var n=el("p","snote");var nb=el("b",null,"Please note: ");n.appendChild(nb);n.appendChild(document.createTextNode(s.note));body.appendChild(n)}
+    var c=el("div","scta");
+    var wa=el("a","btn btn-gold","Ask about "+s.name+" on WhatsApp");wa.href="https://wa.me/919022358855?text="+encodeURIComponent(s.cta||("Hello Yash Infotech, I want to know about "+s.name+"."));wa.target="_blank";wa.rel="noopener";c.appendChild(wa);
+    var call=el("a","btn btn-ghost","Call 90223 58855");call.href="tel:+919022358855";c.appendChild(call);
+    if(id==="adm"){var g=el("a","btn btn-ghost","Join free admission group");g.href="https://chat.whatsapp.com/HsiAVZe4rYoAvf65v9f6CT";g.target="_blank";g.rel="noopener";c.appendChild(g)}
+    if(id==="tech"){var pl=el("a","btn btn-ghost","See our live platforms");pl.href="#platforms";c.appendChild(pl)}
+    body.appendChild(c);w.appendChild(body);d.appendChild(w);
+    if(user){try{history.replaceState(null,"","#service-"+id)}catch(e){}}
+  }
+  $("picker").addEventListener("keydown",function(e){
+    if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;var i=S.findIndex(function(x){return x.id===curSvc});
+    i=(i+(e.key==="ArrowRight"?1:S.length-1))%S.length;showService(S[i].id,true);$("tab-"+S[i].id).focus();
+  });
   // ----- partners -----
   var TYPECOL={"Tie-up":"#F2B705","Client":"#7FA8F7","Service partner":"#5FD3C4"};
   var pf="All";
@@ -477,7 +537,7 @@ section.band.alt{background:var(--surface-2)}
   function buildItems(){
     items=[];
     P.forEach(function(p,i){items.push({k:"Platform",n:p.name,d:p.description,c:p.color,run:function(){open(p)},hint:i<9?"key "+(i+1):""})});
-    S.forEach(function(s){items.push({k:"Service",n:s.name+" Line",d:s.who,c:s.color,run:function(){location.hash="services"}})});
+    S.forEach(function(s){items.push({k:"Service",n:s.name,d:s.who,c:s.color,run:function(){showService(s.id,true);$("services").scrollIntoView({behavior:"smooth"})}})});
     R.forEach(function(r){items.push({k:r.type||"Partner",n:r.name,d:r.city||"",c:TYPECOL[r.type]||"#F2B705",run:function(){if(safeUrl(r.url))window.open(r.url,"_blank","noopener");else location.hash="partners"}})});
     items.push({k:"Contact",n:"WhatsApp Yash Infotech",d:"90223 58855",c:"#1FA855",run:function(){window.open("https://wa.me/919022358855","_blank","noopener")}});
     items.push({k:"Team",n:"Team login (add partners & platforms)",d:"admin.html",c:"#0F1E4A",run:function(){location.href="admin.html"}});

@@ -1,6 +1,130 @@
 [
-  {"id":"adm","code":"LINE 1","name":"Admission","color":"#F2B705","free":true,"who":"Students & parents","description":"Free counselling to a confirmed seat — every branch, every field. No CET, low score or missed form? We still help.","stops":["Free counselling","Course & college shortlist","Eligibility & CET","Forms & documents","Confirmed seat"]},
-  {"id":"res","code":"LINE 2","name":"Research","color":"#F26B1D","free":false,"who":"M.Tech & Ph.D. scholars","description":"Stage-by-stage research mentoring from topic to viva — your research stays your own.","stops":["Topic & proposal","Literature & gap","Methodology","Implementation","Thesis & viva prep"]},
-  {"id":"pub","code":"LINE 3","name":"Publication & IPR","color":"#0E9F8E","free":false,"who":"Researchers & academicians","description":"Ethical, plagiarism-checked publication guidance plus copyright, patent and trademark support.","stops":["Manuscript editing","Journal selection","Submission & revisions","Copyright","Patent & trademark"]},
-  {"id":"tech","code":"LINE 4","name":"Tech Solutions","color":"#2F6FED","free":false,"who":"Institutions, startups & industry","description":"Dashboards, portals, websites and AI / IoT solutions — Ideate · Build · Automate · Achieve.","stops":["AI & ML","IoT & edge","Cloud","Data analytics","Software & portals"]}
+  {
+    "id": "adm",
+    "code": "LINE 1",
+    "name": "Admission Support",
+    "color": "#F2B705",
+    "free": true,
+    "price": "100% free for students and parents",
+    "who": "Students & parents",
+    "tagline": "We help you choose the right course and college, and stay with you until your seat is confirmed.",
+    "forYou": [
+      "You have passed (or are giving) 12th, diploma or graduation and don't know what to choose",
+      "Your CET score is low, or you didn't give CET at all",
+      "You missed a form or a deadline and think it's too late",
+      "Parents who want honest advice before paying any fees"
+    ],
+    "gets": [
+      "One-to-one counselling call or meeting",
+      "A shortlist of courses and colleges that fit your marks, budget and city",
+      "Help with eligibility, CET / CAP rounds and direct admission options",
+      "Form filling and document checklist, step by step",
+      "Follow-up on WhatsApp until the seat is confirmed"
+    ],
+    "stops": [
+      {"t": "Talk to us", "d": "Call or WhatsApp. Tell us your marks, interest and budget."},
+      {"t": "Shortlist", "d": "We suggest suitable courses and colleges, with pros and cons."},
+      {"t": "Eligibility & rounds", "d": "We check eligibility and guide you through CET / CAP or direct admission."},
+      {"t": "Forms & documents", "d": "We help fill forms correctly and keep documents ready."},
+      {"t": "Seat confirmed", "d": "We stay with you until admission is done, and after."}
+    ],
+    "note": "We never charge students or parents anything for admission support. All branches, all fields: Engineering, Management, Computer Applications, Pharmacy, Science, Commerce, Arts and more.",
+    "cta": "Hello Yash Infotech, I need free admission guidance."
+  },
+  {
+    "id": "res",
+    "code": "LINE 2",
+    "name": "Research Support",
+    "color": "#F26B1D",
+    "free": false,
+    "price": "Plans as per scope; first discussion free",
+    "who": "M.Tech, M.E. & Ph.D. scholars",
+    "tagline": "Mentoring at every stage of your research, from choosing a topic to facing the viva. The research and the writing stay yours.",
+    "forYou": [
+      "You need to finalise a research topic or proposal",
+      "You are stuck finding the research gap or the right method",
+      "Your implementation, experiments or results are not coming together",
+      "Your viva or pre-submission seminar is coming up"
+    ],
+    "gets": [
+      "Topic and proposal guidance from experienced faculty and reviewers",
+      "Help with literature survey and finding the research gap",
+      "Methodology, tools and dataset guidance",
+      "Implementation and result-analysis support",
+      "Review of your chapters and mock viva practice"
+    ],
+    "stops": [
+      {"t": "Topic & proposal", "d": "Pick a relevant, doable topic and shape a clear proposal."},
+      {"t": "Literature & gap", "d": "Read the right papers and find what is still unsolved."},
+      {"t": "Methodology", "d": "Choose methods, tools and data that suit your problem."},
+      {"t": "Implementation", "d": "Build, test and analyse results with expert guidance."},
+      {"t": "Review & viva", "d": "Feedback on your chapters and mock viva sessions."}
+    ],
+    "note": "We mentor and review; we do not write theses for students. Your work stays original and in your name.",
+    "cta": "Hello Yash Infotech, I need research support for my M.Tech / Ph.D."
+  },
+  {
+    "id": "pub",
+    "code": "LINE 3",
+    "name": "Publication & IPR",
+    "color": "#0E9F8E",
+    "free": false,
+    "price": "Plans as per paper / filing",
+    "who": "Researchers, faculty & students",
+    "tagline": "Get your work ready for good journals and conferences, and protect your ideas with copyright, patent or trademark.",
+    "forYou": [
+      "You have a paper but don't know which journal or conference to choose",
+      "Your paper got rejected or reviewers asked for major revisions",
+      "You want to avoid fake or predatory journals",
+      "You have an idea, software or product you want to protect"
+    ],
+    "gets": [
+      "Language, structure and formatting review of your manuscript",
+      "Plagiarism check and guidance to fix similarity",
+      "Help choosing genuine Scopus / Web of Science / UGC-listed journals",
+      "Support in responding to reviewer comments",
+      "Copyright, patent (draft & filing) and trademark guidance"
+    ],
+    "stops": [
+      {"t": "Manuscript review", "d": "We check language, structure, figures and references."},
+      {"t": "Journal selection", "d": "We shortlist genuine journals that match your topic."},
+      {"t": "Submit & revise", "d": "We guide submission and replies to reviewers."},
+      {"t": "Copyright", "d": "Register software, content or designs you created."},
+      {"t": "Patent & trademark", "d": "Draft and file to protect your invention or brand."}
+    ],
+    "note": "Acceptance is always the journal's decision; we never promise or sell guaranteed publication. We only work with genuine, ethical journals.",
+    "cta": "Hello Yash Infotech, I need help with publication / IPR."
+  },
+  {
+    "id": "tech",
+    "code": "LINE 4",
+    "name": "Tech Solutions",
+    "color": "#2F6FED",
+    "free": false,
+    "price": "Quote after a free requirement call",
+    "who": "Colleges, universities, startups & businesses",
+    "tagline": "We build the websites, portals, dashboards and AI / IoT systems you need, like the platforms on this page.",
+    "forYou": [
+      "Your college needs an admission, academic or accreditation dashboard",
+      "You want a modern website or an online form with an admin panel",
+      "You have data in Excel and want live reports and charts",
+      "You have an AI, IoT or automation idea and need it built"
+    ],
+    "gets": [
+      "Websites and landing pages that work on mobile",
+      "Portals with login, forms, admin panel and Excel / PDF reports",
+      "Dashboards for admissions, academics, NAAC / NBA / NIRF",
+      "AI & ML models, IoT devices and cloud hosting",
+      "Training for your team and ongoing support"
+    ],
+    "stops": [
+      {"t": "Ideate", "d": "A free call to understand what you need."},
+      {"t": "Plan", "d": "A clear scope, timeline and quote."},
+      {"t": "Build", "d": "We design and develop, with demos at every step."},
+      {"t": "Launch", "d": "We put it online and train your team."},
+      {"t": "Support", "d": "Updates, fixes and new features when you need them."}
+    ],
+    "note": "See real examples in Live platforms above: the ADYPU Academic Dashboard, Admission Dashboard and University Excellence 360° are examples of our work.",
+    "cta": "Hello Yash Infotech, I want to discuss a website / portal / tech project."
+  }
 ]
