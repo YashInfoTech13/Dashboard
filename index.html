@@ -283,6 +283,8 @@ section.band.alt{background:var(--surface-2)}
 .lede,.head p,.pcard p,.prcard p,.sd-top p,.box li,.snote,.howall span,.contact p,.board-foot,.lockbox p,.recent{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
 .head p,.lede{text-wrap:pretty}
 .tab small{margin-left:6px}
+.stat.star{border-color:rgba(242,183,5,.6);background:linear-gradient(135deg,rgba(242,183,5,.2),rgba(255,78,138,.12))}
+.stat.star span{color:#fff;font-weight:600}
 </style>
 </head>
 <body>
@@ -298,12 +300,12 @@ section.band.alt{background:var(--surface-2)}
   <div class="wrap hgrid">
     <div>
       <div class="greet" id="greet">YASH INFOTECH · COMMAND CENTRE</div>
-      <h1 aria-label="One network. Every service.">One network.<br><span aria-hidden="true">For every<span class="rotline"><span class="rot" id="rot">student</span><span class="caret"></span></span></span></h1>
+      <h1 aria-label="One network. Every service.">One network.<br><span aria-hidden="true">For every<span class="rotline"><span class="rot" id="rot">Student</span><span class="caret"></span></span></span></h1>
       <p class="lede">Every Yash Infotech platform, service line, tie-up and client in one place. Pick a station on the board, or press <kbd>Ctrl K</kbd> and type where you want to go.</p>
       <div class="stats" aria-label="At a glance">
+        <div class="stat star"><b data-count="years">0</b><span>Years of togetherness</span></div>
+        <div class="stat star"><b data-count="clients" data-plus="+">0</b><span>Happy clients</span></div>
         <div class="stat"><b data-count="platforms">0</b><span>Live platforms</span></div>
-        <div class="stat"><b data-count="services">0</b><span>Service lines</span></div>
-        <div class="stat"><b data-count="partners">0</b><span>Tie-ups &amp; clients</span></div>
         <div class="stat"><b>₹0</b><span>Admission support</span></div>
       </div>
       <div class="iam-row" aria-label="Find the right service"><span>I am a…</span>
@@ -325,7 +327,7 @@ section.band.alt{background:var(--surface-2)}
     </div>
   </div>
 </section>
-<div class="ticker" aria-label="Announcements"><div class="tt" id="tt"><span>Admission 2027–28: free counselling is open</span><span>Low CET, no CET or missed a form? We still help</span><span>M.Tech &amp; Ph.D. research mentoring</span><span>Genuine journal guidance, copyright &amp; patents</span><span>Dashboards, portals, AI &amp; IoT for institutions</span><span>Call / WhatsApp 90223 58855</span></div></div>
+<div class="ticker" aria-label="Announcements"><div class="tt" id="tt"><span>13 years of togetherness · 450+ happy clients</span><span>Admission 2027–28: free counselling is open</span><span>Low CET, no CET or missed a form? We still help</span><span>M.Tech &amp; Ph.D. research mentoring</span><span>Genuine journal guidance, copyright &amp; patents</span><span>Dashboards, portals, AI &amp; IoT for institutions</span><span>Call / WhatsApp 90223 58855</span></div></div>
 
 <section class="band" id="platforms">
   <div class="wrap">
@@ -454,8 +456,8 @@ section.band.alt{background:var(--surface-2)}
   }
   tick();setInterval(tick,30000);
 
-  function count(key,n){var b=document.querySelector('[data-count="'+key+'"]');if(!b)return;var s=0,steps=24;var still=matchMedia("(prefers-reduced-motion: reduce)").matches;if(still){b.textContent=n;return}
-    var t=setInterval(function(){s++;b.textContent=Math.round(n*s/steps);if(s>=steps)clearInterval(t)},30)}
+  function count(key,n){var b=document.querySelector('[data-count="'+key+'"]');if(!b)return;var plus=b.dataset.plus||"";var s=0,steps=24;var still=matchMedia("(prefers-reduced-motion: reduce)").matches;if(still){b.textContent=n+plus;return}
+    var t=setInterval(function(){s++;b.textContent=Math.round(n*s/steps)+plus;if(s>=steps)clearInterval(t)},30)}
 
   // ----- deep link redirect: ?go=<id> -----
   var GO=new URLSearchParams(location.search).get("go");
@@ -692,8 +694,8 @@ section.band.alt{background:var(--surface-2)}
   var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
   (function(){var tt=$("tt");tt.innerHTML+=tt.innerHTML})();
   (function(){
-    var words=["student","parent","scholar","researcher","institution","service"],wi=0,ci=words[0].length,del=true,node=$("rot");
-    if(still){node.textContent="service";return}
+    var words=["Student","Parent","Scholar","Researcher","Institution","Service"],wi=0,ci=words[0].length,del=true,node=$("rot");
+    if(still){node.textContent="Service";return}
     function step(){var w=words[wi];
       if(del){ci--;if(ci<=0){del=false;wi=(wi+1)%words.length}}
       else{ci++;if(ci>=words[wi].length){del=true;node.textContent=words[wi];return setTimeout(step,1700)}}
@@ -714,7 +716,7 @@ section.band.alt{background:var(--surface-2)}
     P=a[0]||[];S=a[1]||[];R=a[2]||[];
     if(GO){var gp=P.find(function(x){return x.id===GO});doRedirect();if(gp)return}
     renderAll();
-    count("platforms",P.length);count("services",S.length);count("partners",R.length);
+    count("platforms",P.length);count("years",13);count("clients",450);
     P.forEach(check);revealAll();
   });
 })();
