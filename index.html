@@ -279,6 +279,10 @@ section.band.alt{background:var(--surface-2)}
 @media (prefers-reduced-motion:reduce){.aurora i,.ticker .tt,.caret{animation:none}.reveal{opacity:1;transform:none;transition:none}.train,.mtrack,.redirect .ring,.light.wake{animation:none}.pcard{transition:none}html{scroll-behavior:auto}}
 .pcard.reveal{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1),box-shadow .2s}
 .pcard.reveal.in{transition:opacity .7s ease,transform .25s ease,box-shadow .2s}
+/* justified body text */
+.lede,.head p,.pcard p,.prcard p,.sd-top p,.box li,.snote,.howall span,.contact p,.board-foot,.lockbox p,.recent{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
+.head p,.lede{text-wrap:pretty}
+.tab small{margin-left:6px}
 </style>
 </head>
 <body>
@@ -317,7 +321,7 @@ section.band.alt{background:var(--surface-2)}
     <div class="board" aria-labelledby="boardTitle">
       <div class="board-head"><b id="boardTitle">DEPARTURES · LIVE STATUS</b><span class="clock" id="clock">--:--</span></div>
       <div class="metro" id="metro"><span class="train" aria-hidden="true"></span></div>
-      <p class="board-foot">Green: online · Amber: waking up (free hosting can take ~30 s) · Grey: open to check · Press a number key to jump.</p>
+      <p class="board-foot">Green: online · Amber: waking up (free hosting can take about 30 seconds) · Grey: open to check · Purple: admin only. Press a number key to jump.</p>
     </div>
   </div>
 </section>
@@ -532,7 +536,7 @@ section.band.alt{background:var(--surface-2)}
       b.setAttribute("aria-label","Open "+p.name);
       b.appendChild(el("span","dot"));
       var t=el("span");t.appendChild(el("b",null,p.name));t.appendChild(el("small",null,p.category||""));b.appendChild(t);
-      var g=el("span","go");var l=el("span","light");l.setAttribute("data-light",p.id);g.appendChild(l);if(i<9){var k=el("span",null,"key "+(i+1));g.appendChild(k)}b.appendChild(g);
+      var g=el("span","go");var l=el("span","light");l.setAttribute("data-light",p.id);g.appendChild(l);if(i<9){var k=el("span",null,"Key "+(i+1));g.appendChild(k)}b.appendChild(g);
       b.addEventListener("click",function(){open(p)});m.appendChild(b);
     });
   }
@@ -608,7 +612,7 @@ section.band.alt{background:var(--surface-2)}
       var c=el("article","prcard");c.appendChild(logoBox(r));
       var t=el("span","ptype",r.type||"Tie-up");t.style.background=TYPECOL[r.type]||"#F2B705";c.appendChild(t);
       c.appendChild(el("b",null,r.name));if(r.description)c.appendChild(el("p",null,r.description));
-      var meta=[r.city,r.since?"since "+r.since:""].filter(Boolean).join(" · ");if(meta)c.appendChild(el("span","meta",meta));
+      var meta=[r.city,r.since?"Since "+r.since:""].filter(Boolean).join(" · ");if(meta)c.appendChild(el("span","meta",meta));
       if(safeUrl(r.url)){var a=el("a",null,"Visit website →");a.href=r.url;a.target="_blank";a.rel="noopener";c.appendChild(a)}
       g.appendChild(c);
     });
@@ -639,7 +643,7 @@ section.band.alt{background:var(--surface-2)}
   var items=[],sel=0;
   function buildItems(){
     items=[];
-    P.forEach(function(p,i){items.push({k:"Platform",n:p.name,d:p.description,c:p.color,run:function(){open(p)},hint:i<9?"key "+(i+1):""})});
+    P.forEach(function(p,i){items.push({k:"Platform",n:p.name,d:p.description,c:p.color,run:function(){open(p)},hint:i<9?"Key "+(i+1):""})});
     S.forEach(function(s){items.push({k:"Service",n:s.name,d:s.who,c:s.color,run:function(){showService(s.id,true);$("services").scrollIntoView({behavior:"smooth"})}})});
     R.forEach(function(r){items.push({k:r.type||"Partner",n:r.name,d:r.city||"",c:TYPECOL[r.type]||"#F2B705",run:function(){if(safeUrl(r.url))window.open(r.url,"_blank","noopener");else location.hash="partners"}})});
     items.push({k:"Contact",n:"WhatsApp Yash Infotech",d:"90223 58855",c:"#1FA855",run:function(){window.open("https://wa.me/919022358855","_blank","noopener")}});

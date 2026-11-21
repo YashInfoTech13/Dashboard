@@ -64,6 +64,7 @@ textarea{min-height:80px;resize:vertical}
 code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:1px 6px;border-radius:6px}
 @media (max-width:860px){.cols{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:520px){.grid2{grid-template-columns:minmax(0,1fr)}.row{grid-template-columns:44px minmax(0,1fr)}.rbtns{grid-column:1/-1;justify-content:flex-start}}
+.help,.steps li,#vConnect .help{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
 </style>
 </head>
 <body>
@@ -88,7 +89,7 @@ code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:
     <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">How to get a token (one time, 2 minutes)</summary>
       <ol class="steps">
         <li>On GitHub, open <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>.</li>
-        <li>Name it <code>dashboard-admin</code> and pick an expiry (for example 1 year).</li>
+        <li>Name it <code>dashboard-admin</code> and choose an expiry (for example, No expiration).</li>
         <li>Repository access: <b>Only select repositories → YashInfoTech13/Dashboard</b>.</li>
         <li>Permissions → Repository permissions → <b>Contents: Read and write</b>.</li>
         <li>Generate, copy the token and paste it above. Don't share it; anyone with it can edit the dashboard.</li>

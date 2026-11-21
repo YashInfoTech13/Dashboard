@@ -9,8 +9,8 @@
     "who": "Students & parents",
     "tagline": "We help you choose the right course and college, and stay with you until your seat is confirmed.",
     "forYou": [
-      "You have passed (or are giving) 12th, diploma or graduation and don't know what to choose",
-      "Your CET score is low, or you didn't give CET at all",
+      "You have passed (or are appearing for) 12th, diploma or graduation and don't know what to choose next",
+      "Your CET score is low, or you did not appear for CET at all",
       "You missed a form or a deadline and think it's too late",
       "Parents who want honest advice before paying any fees"
     ],
@@ -37,7 +37,7 @@
     "name": "Research Support",
     "color": "#F26B1D",
     "free": false,
-    "price": "Plans as per scope; first discussion free",
+    "price": "Plans as per scope; first discussion is free",
     "who": "M.Tech, M.E. & Ph.D. scholars",
     "tagline": "Mentoring at every stage of your research, from choosing a topic to facing the viva. The research and the writing stay yours.",
     "forYou": [
@@ -118,13 +118,13 @@
       "Training for your team and ongoing support"
     ],
     "stops": [
-      {"t": "Ideate", "d": "A free call to understand what you need."},
+      {"t": "Discuss", "d": "A free call to understand what you need."},
       {"t": "Plan", "d": "A clear scope, timeline and quote."},
       {"t": "Build", "d": "We design and develop, with demos at every step."},
       {"t": "Launch", "d": "We put it online and train your team."},
       {"t": "Support", "d": "Updates, fixes and new features when you need them."}
     ],
-    "note": "See real examples in Live platforms above: the ADYPU Academic Dashboard, Admission Dashboard and University Excellence 360° are examples of our work.",
+    "note": "See real examples under Live platforms above: the ADYPU Academic Dashboard, Admission Dashboard and University Excellence 360° are all built by our team.",
     "cta": "Hello Yash Infotech, I want to discuss a website / portal / tech project."
   }
 ]
