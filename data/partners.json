@@ -28,5 +28,15 @@
     "url": "",
     "description": "Academic partner institution for Admission Connect 2027–28.",
     "since": "2026"
+  },
+  {
+    "id": "gnvs-institute-of-management-mumbai",
+    "name": "GNVS Institute of Management,Mumbai",
+    "type": "Client",
+    "logo": "logos/gnvs-institute-of-management-mumbai-1795447456482.png",
+    "city": "Mumbai",
+    "url": "https://www.gnvsiom.org/core-faculty/Ritu%20Bhattacharyya",
+    "description": "For chatBot",
+    "since": "2026"
   }
 ]
