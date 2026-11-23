@@ -58,24 +58,6 @@
     }
   },
   {
-    "id": "excellence360",
-    "name": "University Excellence 360°",
-    "url": "",
-    "category": "Accreditation",
-    "color": "#0e9f8e",
-    "icon": "award",
-    "description": "Accreditation, ranking & recognition handbook with the Strategic Planner 2027–29.",
-    "wakes": false,
-    "locked": true,
-    "enc": {
-      "v": 1,
-      "iter": 250000,
-      "salt": "6KDJbBkVYlqAmj3YYTD6ig==",
-      "iv": "rti8LR5Uo+K96NVy",
-      "ct": "2SpCWBhUCzux7kgTqtjmCh7nrUDp6rsOhw6zBrZc+TwOsaPCbzHUnGrOmJUzTLkDRFEJ+4Qmt7ijXM+K32JAWgVco2jLz3dmxZo="
-    }
-  },
-  {
     "id": "gnvs-institute-of-management-chatbot",
     "name": "GNVS Institute of Management (Chatbot)",
     "url": "",
@@ -91,6 +73,24 @@
       "salt": "9L7Nv5fWXaQ5A3eTxPfjYA==",
       "iv": "ZwKe3wilCMQOxYTj",
       "ct": "S058KOeJjrP5N5KUjG8DW5b9MVqmlCHLEQe/AYgNG3lZyQXGC0U7jQ=="
+    }
+  },
+  {
+    "id": "excellence360",
+    "name": "University Excellence 360°",
+    "url": "",
+    "category": "Accreditation",
+    "color": "#0e9f8e",
+    "icon": "award",
+    "description": "Accreditation, ranking & recognition handbook with the Strategic Planner 2027–29.",
+    "wakes": false,
+    "locked": true,
+    "enc": {
+      "v": 1,
+      "iter": 250000,
+      "salt": "6KDJbBkVYlqAmj3YYTD6ig==",
+      "iv": "rti8LR5Uo+K96NVy",
+      "ct": "2SpCWBhUCzux7kgTqtjmCh7nrUDp6rsOhw6zBrZc+TwOsaPCbzHUnGrOmJUzTLkDRFEJ+4Qmt7ijXM+K32JAWgVco2jLz3dmxZo="
     }
   }
 ]
