@@ -74,5 +74,23 @@
       "iv": "rti8LR5Uo+K96NVy",
       "ct": "2SpCWBhUCzux7kgTqtjmCh7nrUDp6rsOhw6zBrZc+TwOsaPCbzHUnGrOmJUzTLkDRFEJ+4Qmt7ijXM+K32JAWgVco2jLz3dmxZo="
     }
+  },
+  {
+    "id": "gnvs-institute-of-management-chatbot",
+    "name": "GNVS Institute of Management (Chatbot)",
+    "url": "",
+    "category": "ChatBot",
+    "color": "#05f009",
+    "icon": "grid",
+    "description": "Working on Multilanguage ChatBot",
+    "wakes": false,
+    "locked": true,
+    "enc": {
+      "v": 1,
+      "iter": 250000,
+      "salt": "9L7Nv5fWXaQ5A3eTxPfjYA==",
+      "iv": "ZwKe3wilCMQOxYTj",
+      "ct": "S058KOeJjrP5N5KUjG8DW5b9MVqmlCHLEQe/AYgNG3lZyQXGC0U7jQ=="
+    }
   }
 ]
