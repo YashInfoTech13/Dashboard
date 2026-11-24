@@ -84,6 +84,16 @@
     }
   },
   {
+    "id": "admission-dashboard-demo",
+    "name": "Admission Dashboard Demo",
+    "url": "https://yashinfotech-crm.onrender.com/",
+    "category": "Admissions",
+    "color": "#f2b705",
+    "icon": "grid",
+    "description": "Admission Details",
+    "wakes": false
+  },
+  {
     "id": "excellence360",
     "name": "University Excellence 360°",
     "url": "",
@@ -100,15 +110,5 @@
       "iv": "rti8LR5Uo+K96NVy",
       "ct": "2SpCWBhUCzux7kgTqtjmCh7nrUDp6rsOhw6zBrZc+TwOsaPCbzHUnGrOmJUzTLkDRFEJ+4Qmt7ijXM+K32JAWgVco2jLz3dmxZo="
     }
-  },
-  {
-    "id": "admission-dashboard-demo",
-    "name": "Admission Dashboard Demo",
-    "url": "https://yashinfotech-crm.onrender.com/",
-    "category": "Admissions",
-    "color": "#f2b705",
-    "icon": "grid",
-    "description": "Admission Details",
-    "wakes": false
   }
 ]
