@@ -30,16 +30,6 @@
     "wakes": true
   },
   {
-    "id": "ojas-hospital",
-    "name": "Ojas Hospital",
-    "url": "https://ojashospital2025-lab.github.io/OPD/",
-    "category": "OPD",
-    "color": "#f08205",
-    "icon": "grid",
-    "description": "Website for Ojas Clinic, Telhara, with online OPD appointment booking.",
-    "wakes": false
-  },
-  {
     "id": "task-management",
     "name": "Task Management",
     "url": "",
@@ -56,6 +46,16 @@
       "iv": "/PYJ2vmoh/emzya9",
       "ct": "J5NbApHhZvz8qlKt6pEzluRuvSHJC+7EBEUf4Mtkt5XHq+Vr4pVb2CJSS5wYUJ0SFcPZ06RNJSMYz2/dmPixgWVWsR0CopDpDIPqHw=="
     }
+  },
+  {
+    "id": "ojas-hospital",
+    "name": "Ojas Hospital",
+    "url": "https://ojashospital2025-lab.github.io/OPD/",
+    "category": "OPD",
+    "color": "#f08205",
+    "icon": "grid",
+    "description": "Website for Ojas Clinic, Telhara, with online OPD appointment booking.",
+    "wakes": false
   },
   {
     "id": "academic",
