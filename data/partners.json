@@ -10,16 +10,6 @@
     "since": "2026"
   },
   {
-    "id": "alard",
-    "name": "ALARD University",
-    "type": "Tie-up",
-    "logo": "logos/alard.jpg",
-    "city": "Pune",
-    "url": "",
-    "description": "Academic partner institution for Admission Connect 2027–28.",
-    "since": "2026"
-  },
-  {
     "id": "gnvs-institute-of-management-mumbai",
     "name": "GNVS Institute of Management,Mumbai",
     "type": "Client",
@@ -27,6 +17,16 @@
     "city": "Mumbai",
     "url": "https://www.gnvsiom.org/core-faculty/Ritu%20Bhattacharyya",
     "description": "For chatBot",
+    "since": "2026"
+  },
+  {
+    "id": "alard",
+    "name": "ALARD University",
+    "type": "Tie-up",
+    "logo": "logos/alard.jpg",
+    "city": "Pune",
+    "url": "",
+    "description": "Academic partner institution for Admission Connect 2027–28.",
     "since": "2026"
   },
   {
