@@ -94,24 +94,6 @@
     }
   },
   {
-    "id": "excellence360",
-    "name": "University Excellence 360°",
-    "url": "",
-    "category": "Accreditation",
-    "color": "#0e9f8e",
-    "icon": "award",
-    "description": "Accreditation, ranking & recognition handbook with the Strategic Planner 2027–29.",
-    "wakes": false,
-    "locked": true,
-    "enc": {
-      "v": 1,
-      "iter": 250000,
-      "salt": "6KDJbBkVYlqAmj3YYTD6ig==",
-      "iv": "rti8LR5Uo+K96NVy",
-      "ct": "2SpCWBhUCzux7kgTqtjmCh7nrUDp6rsOhw6zBrZc+TwOsaPCbzHUnGrOmJUzTLkDRFEJ+4Qmt7ijXM+K32JAWgVco2jLz3dmxZo="
-    }
-  },
-  {
     "id": "task-management",
     "name": "Task Management",
     "url": "",
@@ -127,6 +109,24 @@
       "salt": "93THSOWz2eqigWTIiJUiOA==",
       "iv": "/PYJ2vmoh/emzya9",
       "ct": "J5NbApHhZvz8qlKt6pEzluRuvSHJC+7EBEUf4Mtkt5XHq+Vr4pVb2CJSS5wYUJ0SFcPZ06RNJSMYz2/dmPixgWVWsR0CopDpDIPqHw=="
+    }
+  },
+  {
+    "id": "excellence360",
+    "name": "University Excellence 360°",
+    "url": "",
+    "category": "Accreditation",
+    "color": "#0e9f8e",
+    "icon": "award",
+    "description": "Accreditation, ranking & recognition handbook with the Strategic Planner 2027–29.",
+    "wakes": false,
+    "locked": true,
+    "enc": {
+      "v": 1,
+      "iter": 250000,
+      "salt": "6KDJbBkVYlqAmj3YYTD6ig==",
+      "iv": "rti8LR5Uo+K96NVy",
+      "ct": "2SpCWBhUCzux7kgTqtjmCh7nrUDp6rsOhw6zBrZc+TwOsaPCbzHUnGrOmJUzTLkDRFEJ+4Qmt7ijXM+K32JAWgVco2jLz3dmxZo="
     }
   }
 ]
