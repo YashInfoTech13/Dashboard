@@ -48,24 +48,6 @@
     }
   },
   {
-    "id": "gnvs-institute-of-management-chatbot",
-    "name": "GNVS Institute of Management (Chatbot)",
-    "url": "",
-    "category": "ChatBot",
-    "color": "#05f009",
-    "icon": "grid",
-    "description": "Working on Multilanguage ChatBot",
-    "wakes": false,
-    "locked": true,
-    "enc": {
-      "v": 1,
-      "iter": 250000,
-      "salt": "9L7Nv5fWXaQ5A3eTxPfjYA==",
-      "iv": "ZwKe3wilCMQOxYTj",
-      "ct": "S058KOeJjrP5N5KUjG8DW5b9MVqmlCHLEQe/AYgNG3lZyQXGC0U7jQ=="
-    }
-  },
-  {
     "id": "academic",
     "name": "ADYPU Academic Dashboard",
     "url": "",
@@ -81,6 +63,24 @@
       "salt": "/nxK9u4xUdrFHUC+LrgDFA==",
       "iv": "M1kd9o5AIBYHlT3g",
       "ct": "LyP0mL7Jegb8dOC5Kc4SLhHah7R2sDhp8vZ2FXsZnoQUMpnR/hOWmuXywBgE+Zki9ZntihpRLzmopXLb/A=="
+    }
+  },
+  {
+    "id": "gnvs-institute-of-management-chatbot",
+    "name": "GNVS Institute of Management (Chatbot)",
+    "url": "",
+    "category": "ChatBot",
+    "color": "#05f009",
+    "icon": "grid",
+    "description": "Working on Multilanguage ChatBot",
+    "wakes": false,
+    "locked": true,
+    "enc": {
+      "v": 1,
+      "iter": 250000,
+      "salt": "9L7Nv5fWXaQ5A3eTxPfjYA==",
+      "iv": "ZwKe3wilCMQOxYTj",
+      "ct": "S058KOeJjrP5N5KUjG8DW5b9MVqmlCHLEQe/AYgNG3lZyQXGC0U7jQ=="
     }
   },
   {
