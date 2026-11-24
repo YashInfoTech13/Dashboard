@@ -30,6 +30,16 @@
     "wakes": false
   },
   {
+    "id": "admission-dashboard-demo",
+    "name": "Admission Dashboard Demo",
+    "url": "https://yashinfotech-crm.onrender.com/",
+    "category": "Admissions",
+    "color": "#f2b705",
+    "icon": "grid",
+    "description": "Admission Details",
+    "wakes": false
+  },
+  {
     "id": "academic",
     "name": "ADYPU Academic Dashboard",
     "url": "",
@@ -46,16 +56,6 @@
       "iv": "M1kd9o5AIBYHlT3g",
       "ct": "LyP0mL7Jegb8dOC5Kc4SLhHah7R2sDhp8vZ2FXsZnoQUMpnR/hOWmuXywBgE+Zki9ZntihpRLzmopXLb/A=="
     }
-  },
-  {
-    "id": "admission-dashboard-demo",
-    "name": "Admission Dashboard Demo",
-    "url": "https://yashinfotech-crm.onrender.com/",
-    "category": "Admissions",
-    "color": "#f2b705",
-    "icon": "grid",
-    "description": "Admission Details",
-    "wakes": false
   },
   {
     "id": "admission",
