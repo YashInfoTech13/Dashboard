@@ -66,6 +66,16 @@
     }
   },
   {
+    "id": "admission-dashboard-demo",
+    "name": "Admission Dashboard Demo",
+    "url": "https://yashinfotech-crm.onrender.com/",
+    "category": "Admissions",
+    "color": "#f2b705",
+    "icon": "grid",
+    "description": "Admission Details",
+    "wakes": false
+  },
+  {
     "id": "gnvs-institute-of-management-chatbot",
     "name": "GNVS Institute of Management (Chatbot)",
     "url": "",
@@ -82,16 +92,6 @@
       "iv": "ZwKe3wilCMQOxYTj",
       "ct": "S058KOeJjrP5N5KUjG8DW5b9MVqmlCHLEQe/AYgNG3lZyQXGC0U7jQ=="
     }
-  },
-  {
-    "id": "admission-dashboard-demo",
-    "name": "Admission Dashboard Demo",
-    "url": "https://yashinfotech-crm.onrender.com/",
-    "category": "Admissions",
-    "color": "#f2b705",
-    "icon": "grid",
-    "description": "Admission Details",
-    "wakes": false
   },
   {
     "id": "excellence360",
