@@ -40,24 +40,6 @@
     "wakes": false
   },
   {
-    "id": "academic",
-    "name": "ADYPU Academic Dashboard",
-    "url": "",
-    "category": "Academic",
-    "color": "#2f6fed",
-    "icon": "book",
-    "description": "Academic daybook, records and reports for ADYPU in one place.",
-    "wakes": false,
-    "locked": true,
-    "enc": {
-      "v": 1,
-      "iter": 250000,
-      "salt": "/nxK9u4xUdrFHUC+LrgDFA==",
-      "iv": "M1kd9o5AIBYHlT3g",
-      "ct": "LyP0mL7Jegb8dOC5Kc4SLhHah7R2sDhp8vZ2FXsZnoQUMpnR/hOWmuXywBgE+Zki9ZntihpRLzmopXLb/A=="
-    }
-  },
-  {
     "id": "task-management",
     "name": "Task Management",
     "url": "",
@@ -73,6 +55,24 @@
       "salt": "93THSOWz2eqigWTIiJUiOA==",
       "iv": "/PYJ2vmoh/emzya9",
       "ct": "J5NbApHhZvz8qlKt6pEzluRuvSHJC+7EBEUf4Mtkt5XHq+Vr4pVb2CJSS5wYUJ0SFcPZ06RNJSMYz2/dmPixgWVWsR0CopDpDIPqHw=="
+    }
+  },
+  {
+    "id": "academic",
+    "name": "ADYPU Academic Dashboard",
+    "url": "",
+    "category": "Academic",
+    "color": "#2f6fed",
+    "icon": "book",
+    "description": "Academic daybook, records and reports for ADYPU in one place.",
+    "wakes": false,
+    "locked": true,
+    "enc": {
+      "v": 1,
+      "iter": 250000,
+      "salt": "/nxK9u4xUdrFHUC+LrgDFA==",
+      "iv": "M1kd9o5AIBYHlT3g",
+      "ct": "LyP0mL7Jegb8dOC5Kc4SLhHah7R2sDhp8vZ2FXsZnoQUMpnR/hOWmuXywBgE+Zki9ZntihpRLzmopXLb/A=="
     }
   },
   {
