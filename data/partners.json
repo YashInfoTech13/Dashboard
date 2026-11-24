@@ -20,20 +20,20 @@
     "since": "2026"
   },
   {
-    "id": "alard",
-    "name": "ALARD University",
+    "id": "adypu",
+    "name": "Ajeenkya D Y Patil University",
     "type": "Tie-up",
-    "logo": "logos/alard.jpg",
+    "logo": "logos/adypu_full.jpg",
     "city": "Pune",
     "url": "",
     "description": "Academic partner institution for Admission Connect 2027–28.",
     "since": "2026"
   },
   {
-    "id": "adypu",
-    "name": "Ajeenkya D Y Patil University",
+    "id": "alard",
+    "name": "ALARD University",
     "type": "Tie-up",
-    "logo": "logos/adypu_full.jpg",
+    "logo": "logos/alard.jpg",
     "city": "Pune",
     "url": "",
     "description": "Academic partner institution for Admission Connect 2027–28.",
