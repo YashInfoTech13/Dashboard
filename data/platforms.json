@@ -31,13 +31,21 @@
   },
   {
     "id": "admission",
-    "name": "Admission Dashboard",
-    "url": "https://adypu-admission.onrender.com/",
+    "name": "Admission Dashboard Veloces Campus",
+    "url": "",
     "category": "Admissions",
-    "color": "#F2B705",
+    "color": "#f2b705",
     "icon": "users",
-    "description": "Admission enquiries, follow-ups, reports and Excel / PDF exports.",
-    "wakes": true
+    "description": "Veloces Campus Admission enquiries, follow-ups, reports and Excel / PDF exports.",
+    "wakes": true,
+    "locked": true,
+    "enc": {
+      "v": 1,
+      "iter": 250000,
+      "salt": "kLOcpsEcPN2mKeazweIopw==",
+      "iv": "wIz8zbOIV42q85s0",
+      "ct": "BwvDyqHQo4jvWSWq1orCJjozFFL40yO9WC+A8h96T3W+OD5hNcsZ+061DsG6jG2/7h4OdZI="
+    }
   },
   {
     "id": "gnvs-institute-of-management-chatbot",
