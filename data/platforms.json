@@ -10,16 +10,6 @@
     "wakes": false
   },
   {
-    "id": "snbp",
-    "name": "SNBP University Website",
-    "url": "https://snbpuniversity.edu.in/wakad/",
-    "category": "Website",
-    "color": "#f26b1d",
-    "icon": "globe",
-    "description": "Admissions, schools, programmes, campus life and enquiries for SNBP University, Pune.",
-    "wakes": true
-  },
-  {
     "id": "admission-dashboard-demo",
     "name": "Admission Dashboard Demo",
     "url": "https://yashinfotech-crm.onrender.com/",
@@ -28,6 +18,16 @@
     "icon": "grid",
     "description": "Admission Details",
     "wakes": false
+  },
+  {
+    "id": "snbp",
+    "name": "SNBP University Website",
+    "url": "https://snbpuniversity.edu.in/wakad/",
+    "category": "Website",
+    "color": "#f26b1d",
+    "icon": "globe",
+    "description": "Admissions, schools, programmes, campus life and enquiries for SNBP University, Pune.",
+    "wakes": true
   },
   {
     "id": "ojas-hospital",
