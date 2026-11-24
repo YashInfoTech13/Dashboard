@@ -48,6 +48,16 @@
     }
   },
   {
+    "id": "admission-dashboard-demo",
+    "name": "Admission Dashboard Demo",
+    "url": "https://yashinfotech-crm.onrender.com/",
+    "category": "Admissions",
+    "color": "#f2b705",
+    "icon": "grid",
+    "description": "Admission Details",
+    "wakes": false
+  },
+  {
     "id": "admission",
     "name": "Admission Dashboard Veloces Campus",
     "url": "",
@@ -64,16 +74,6 @@
       "iv": "wIz8zbOIV42q85s0",
       "ct": "BwvDyqHQo4jvWSWq1orCJjozFFL40yO9WC+A8h96T3W+OD5hNcsZ+061DsG6jG2/7h4OdZI="
     }
-  },
-  {
-    "id": "admission-dashboard-demo",
-    "name": "Admission Dashboard Demo",
-    "url": "https://yashinfotech-crm.onrender.com/",
-    "category": "Admissions",
-    "color": "#f2b705",
-    "icon": "grid",
-    "description": "Admission Details",
-    "wakes": false
   },
   {
     "id": "gnvs-institute-of-management-chatbot",
