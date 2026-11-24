@@ -38,5 +38,15 @@
     "url": "https://www.gnvsiom.org/core-faculty/Ritu%20Bhattacharyya",
     "description": "For chatBot",
     "since": "2026"
+  },
+  {
+    "id": "veloces-campus",
+    "name": "Veloces Campus",
+    "type": "Tie-up",
+    "logo": "logos/veloces-campus-1795492143192.png",
+    "city": "Pune",
+    "url": "https://velocescampus.com/",
+    "description": "Admission Portal",
+    "since": "2026"
   }
 ]
