@@ -58,6 +58,24 @@
     }
   },
   {
+    "id": "task-management",
+    "name": "Task Management",
+    "url": "",
+    "category": "Task Management",
+    "color": "#f2b705",
+    "icon": "grid",
+    "description": "Task Management",
+    "wakes": false,
+    "locked": true,
+    "enc": {
+      "v": 1,
+      "iter": 250000,
+      "salt": "93THSOWz2eqigWTIiJUiOA==",
+      "iv": "/PYJ2vmoh/emzya9",
+      "ct": "J5NbApHhZvz8qlKt6pEzluRuvSHJC+7EBEUf4Mtkt5XHq+Vr4pVb2CJSS5wYUJ0SFcPZ06RNJSMYz2/dmPixgWVWsR0CopDpDIPqHw=="
+    }
+  },
+  {
     "id": "admission",
     "name": "Admission Dashboard Veloces Campus",
     "url": "",
@@ -91,24 +109,6 @@
       "salt": "9L7Nv5fWXaQ5A3eTxPfjYA==",
       "iv": "ZwKe3wilCMQOxYTj",
       "ct": "S058KOeJjrP5N5KUjG8DW5b9MVqmlCHLEQe/AYgNG3lZyQXGC0U7jQ=="
-    }
-  },
-  {
-    "id": "task-management",
-    "name": "Task Management",
-    "url": "",
-    "category": "Task Management",
-    "color": "#f2b705",
-    "icon": "grid",
-    "description": "Task Management",
-    "wakes": false,
-    "locked": true,
-    "enc": {
-      "v": 1,
-      "iter": 250000,
-      "salt": "93THSOWz2eqigWTIiJUiOA==",
-      "iv": "/PYJ2vmoh/emzya9",
-      "ct": "J5NbApHhZvz8qlKt6pEzluRuvSHJC+7EBEUf4Mtkt5XHq+Vr4pVb2CJSS5wYUJ0SFcPZ06RNJSMYz2/dmPixgWVWsR0CopDpDIPqHw=="
     }
   },
   {
