@@ -120,6 +120,7 @@ code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:
           <div class="full"><label for="pLogo">Logo (PNG or JPG)</label><input id="pLogo" type="file" accept="image/png,image/jpeg,image/webp"><div class="prev" id="pPrev">No logo — initials will be shown</div><p class="help">Resized automatically before upload. Use a logo on a white or transparent background.</p></div>
         </div>
         <div id="fPlatform" class="grid2" style="margin-top:14px" hidden>
+          <div class="full"><label for="lDemo">Demo video (optional, MP4 up to 25 MB)</label><input id="lDemo" type="file" accept="video/mp4"><p class="help" id="lDemoNow">No demo video. If you add one, a small ▶ DEMO button appears next to the platform name and plays it full screen.</p><label id="lDemoRmWrap" hidden style="display:flex;gap:8px;align-items:center;font-weight:500;margin-top:6px"><input type="checkbox" id="lDemoRm" style="width:18px;height:18px"> Remove the current demo video</label></div>
           <div class="full"><label for="lAccess">Secure it or open access? *</label><select id="lAccess"><option value="">Choose one…</option><option value="public">Open access: anyone can open it</option><option value="locked">Secure: ask for admin ID &amp; password</option></select></div>
           <div class="full"><label for="lName">Platform name *</label><input id="lName" placeholder="e.g. Placement Portal"></div>
           <div class="full"><label for="lUrl">Link *</label><input id="lUrl" placeholder="https://…"></div>
@@ -236,13 +237,13 @@ code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:
     $("fPartner").hidden=KIND!=="partners";$("fPlatform").hidden=KIND!=="platforms";
     $("formTitle").textContent=KIND==="partners"?"Add a partner":"Add a platform";
     $("pPrev").textContent="No logo — initials will be shown";$("pSince").value=String(new Date().getFullYear());$("lColor").value="#F2B705";
-    $("lLink").textContent=location.href.replace(/admin\.html.*$/,"")+"?go=…";$("lAccess").value="";syncLock();render();
+    $("lLink").textContent=location.href.replace(/admin\.html.*$/,"")+"?go=…";$("lAccess").value="";$("lDemoNow").textContent="No demo video. If you add one, a small ▶ DEMO button appears next to the platform name and plays it full screen.";$("lDemoRmWrap").hidden=true;syncLock();render();
   }
   function edit(r){
     resetForm();EDIT=r;$("formTitle").textContent="Edit: "+r.name;
     if(KIND==="partners"){$("pName").value=r.name||"";$("pType").value=r.type||"Tie-up";$("pSince").value=r.since||"";$("pCity").value=r.city||"";$("pUrl").value=r.url||"";$("pDesc").value=r.description||"";
       if(r.logo){$("pPrev").textContent="";var i=el("img");i.src=r.logo+"?v="+Date.now();i.alt="Current logo";$("pPrev").appendChild(i)}}
-    else{$("lName").value=r.name||"";$("lUrl").value=r.url||"";$("lCat").value=r.category||"";$("lIcon").value=r.icon||"grid";$("lColor").value=r.color||"#F2B705";$("lWakes").value=String(!!r.wakes);$("lDesc").value=r.description||"";$("lAccess").value=r.locked?"locked":"public";if(r.locked)$("lUrl").value="";syncLock();
+    else{$("lName").value=r.name||"";$("lUrl").value=r.url||"";$("lCat").value=r.category||"";$("lIcon").value=r.icon||"grid";$("lColor").value=r.color||"#F2B705";$("lWakes").value=String(!!r.wakes);$("lDesc").value=r.description||"";$("lAccess").value=r.locked?"locked":"public";if(r.demo){$("lDemoNow").textContent="Current demo video: "+r.demo.split("/").pop()+". Choose a new file to replace it.";$("lDemoRmWrap").hidden=false}if(r.locked)$("lUrl").value="";syncLock();
       $("lLink").textContent=location.href.replace(/admin\.html.*$/,"")+"?go="+r.id}
     render();$("form").scrollIntoView({behavior:"smooth",block:"start"});
   }
@@ -289,11 +290,16 @@ code{font-family:var(--mono);font-size:13px;background:var(--surface-2);padding:
       }
       rec={id:old?old.id:slug(n),name:n,url:locked?"":u,category:$("lCat").value.trim(),color:$("lColor").value,icon:$("lIcon").value,description:$("lDesc").value.trim(),wakes:$("lWakes").value==="true"};
       if(locked){rec.locked=true;if(keepEnc)rec.enc=old.enc}
+      if(old&&old.demo&&!$("lDemoRm").checked){rec.demo=old.demo;if(old.demoPoster)rec.demoPoster=old.demoPoster;if(old.demoTitle)rec.demoTitle=old.demoTitle}
+      var dfile=$("lDemo").files[0];
+      if(dfile&&dfile.size>25*1024*1024){fmsg("That video is over 25 MB. Please compress it or choose a shorter one.","bad");return}
     }
     if(!old){var base=rec.id,k=2;while(DATA[KIND].some(function(x){return x.id===rec.id}))rec.id=base+"-"+(k++)}
     $("save").disabled=true;fmsg("Saving…");
     var step=Promise.resolve();
     if(KIND==="platforms"&&rec.locked&&!rec.enc){step=encryptUrl($("lUrl").value.trim(),$("lkUser").value,$("lkPass").value).then(function(enc){rec.enc=enc})}
+    if(KIND==="platforms"&&$("lDemo").files[0]){var vf=$("lDemo").files[0];step=step.then(function(){fmsg("Uploading demo video… (this can take a minute)");return new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){res(String(fr.result).split(",")[1])};fr.onerror=rej;fr.readAsDataURL(vf)})})
+      .then(function(b64){var vp="videos/"+rec.id+"-"+Date.now()+".mp4";return putFile(vp,b64,"Demo video for "+rec.name).then(function(){rec.demo=vp;delete rec.demoPoster;rec.demoTitle=rec.name+" demo"})})}
     if(KIND==="partners"&&LOGO){var lp="logos/"+rec.id+"-"+Date.now()+".png";fmsg("Uploading logo…");
       step=putFile(lp,LOGO.split(",")[1],"Logo for "+rec.name).then(function(){rec.logo=lp})}
     step.then(function(){

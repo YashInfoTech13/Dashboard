@@ -17,7 +17,10 @@
     "color": "#f2b705",
     "icon": "grid",
     "description": "Admission Details",
-    "wakes": false
+    "wakes": false,
+    "demo": "videos/admission-demo.mp4",
+    "demoPoster": "videos/admission-demo.jpg",
+    "demoTitle": "Admission Portal, start to end"
   },
   {
     "id": "snbp",
@@ -27,7 +30,10 @@
     "color": "#f26b1d",
     "icon": "globe",
     "description": "Admissions, schools, programmes, campus life and enquiries for SNBP University, Pune.",
-    "wakes": true
+    "wakes": true,
+    "demo": "videos/snbp-wakad-tour.mp4",
+    "demoPoster": "videos/snbp-wakad-tour.jpg",
+    "demoTitle": "SNBP Wakad website tour"
   },
   {
     "id": "task-management",
