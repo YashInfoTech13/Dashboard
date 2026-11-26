@@ -115,7 +115,10 @@
       "salt": "9L7Nv5fWXaQ5A3eTxPfjYA==",
       "iv": "ZwKe3wilCMQOxYTj",
       "ct": "S058KOeJjrP5N5KUjG8DW5b9MVqmlCHLEQe/AYgNG3lZyQXGC0U7jQ=="
-    }
+    },
+    "demo": "videos/admission-demo.mp4",
+    "demoPoster": "videos/admission-demo.jpg",
+    "demoTitle": "GNVS Institute of Management: admission portal & chatbot demo"
   },
   {
     "id": "excellence360",
